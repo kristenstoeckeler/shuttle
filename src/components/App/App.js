@@ -47,13 +47,13 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={UserPage}
+              component={Dashboard}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the Dashboard page instead. */}
             <ProtectedRoute
               exact
-              path="/dashboard"
+              path="/home"
               component={Dashboard}
             />
             {/* If none of the other routes matched, we will show a 404. */}

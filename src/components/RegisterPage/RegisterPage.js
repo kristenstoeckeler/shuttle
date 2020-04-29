@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import CreateAccountCard from '../CreateAccountCard/CreateAccountCard';
 
 class RegisterPage extends Component {
   state = {
@@ -31,7 +32,16 @@ class RegisterPage extends Component {
 
   render() {
     return (
+      <>
       <div>
+        <center>
+            <CreateAccountCard />
+        </center>
+
+      </div>
+      
+      {/* <div>
+        
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -40,40 +50,8 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <form onSubmit={this.registerUser}>
-          <h1>Create Account</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="register"
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-          </div>
-        </form>
-        <center>
+         */}
+        {/* <center>
           <button
             type="button"
             className="link-button"
@@ -81,9 +59,9 @@ class RegisterPage extends Component {
           >
             Login
           </button>
-        </center>
+        </center> */}
 
-        <center>
+        {/* <center>
           <button
             type="button"
             className="link-button"
@@ -91,8 +69,9 @@ class RegisterPage extends Component {
           >
             Register
           </button>
-        </center>
-      </div>
+        </center> */}
+      {/* </div> */}
+      </>
     );
   }
 }
