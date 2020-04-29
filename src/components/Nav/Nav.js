@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Input from '@material-ui/core/Input';
 import './Nav.css';
 
 const styles = {
@@ -36,19 +37,20 @@ function Nav(props){
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
           </IconButton>
+          <Link to="/home"></Link>
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Shuttle: a project tool for handweavers
           </Typography>
-          <Link to="/home">
-            <h2 className="nav-title">Shuttle: a project tool for handweavers</h2>
-          </Link>
-          <Link className="nav-link" to="/home">
-            {props.user.id ? 'Dashboard' :
-              <>
-                <LoginPage className="nav-link" />
-              </>
-            }
-          </Link>
+
+          {props.user.id ? 'Dashboard' :
+            <>
+              
+
+              <LoginPage className="nav-link" />
+            </>
+          }
+          {/* <Link className="nav-link" to="/home"></Link> */}
+
           <Link className="nav-link" to="/home">
             {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
@@ -60,16 +62,17 @@ function Nav(props){
             <>
               <Link className="nav-link" to="/dashboard">
                 Dashboard
-          </Link>
+              </Link>
               <LogOutButton className="nav-link" />
             </>
           )}
           {/* Always show this link since the about page is not protected */}
           <Link className="nav-link" to="/about">
             About
-      </Link>
+          </Link>
+          <Button color="inherit" type="submit">About</Button>
 
-          <Button color="inherit">Login</Button>
+          {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>
     </div>

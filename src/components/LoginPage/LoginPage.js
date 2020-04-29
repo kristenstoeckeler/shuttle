@@ -1,8 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './LoginPage.css';
 import 'typeface-roboto';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  button: {
+    margin: 5,
+  }
+}; 
+
 
 class LoginPage extends Component {
   state = {
@@ -33,8 +56,11 @@ class LoginPage extends Component {
   }
 
   render() {
+    const classes = this.props.classes;
+
     return (
       <div>
+        
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -44,47 +70,36 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
           <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
+            <Input
+              placeholder="username" 
+              className="input" 
+              type="text" 
+              name="username" 
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}>
+            </Input>
+            
+            <Input
+              placeholder="password" 
+              className="input" 
+              type="text" 
+              name="password" 
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}>
+            </Input>
+            <Button color="inherit" type="submit">Login</Button>
           </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
+
+          {/* <div>
             <input
               className="log-in"
               type="submit"
               name="submit"
               value="Log In"
             />
-          </div>
+          </div> */}
         </form>
-        <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
-          >
-            Register
-          </button>
-        </center>
       </div>
     );
   }
@@ -97,4 +112,5 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(LoginPage);
+export default withStyles(styles)(connect(mapStateToProps)(LoginPage));
+
