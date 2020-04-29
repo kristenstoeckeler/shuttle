@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import LoginPage from '../LoginPage/LoginPage';
+import Dashboard from '../Dashboard/Dashboard';
+import DashboardButton from '../DashboardButton/DashboardButton';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -41,35 +43,29 @@ function Nav(props){
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Shuttle: a project tool for handweavers
           </Typography>
-
-          {props.user.id ? 'Dashboard' :
+          {props.user.id ? <DashboardButton/> :
             <>
-              
-
               <LoginPage className="nav-link" />
             </>
-          }
+          } 
           {/* <Link className="nav-link" to="/home"></Link> */}
 
-          <Link className="nav-link" to="/home">
+          {/* <Link className="nav-link" to="/home"> */}
             {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-            {props.user.id ? 'Home' : 'Login / Register'}
-          </Link>
+            {/* {props.user.id ? <Dashboard /> : 'Login / Register'}
+          </Link> */}
           {/* Show the link to the info page and the logout button if the user is logged in */}
           {props.user.id && (
             <>
-              <Link className="nav-link" to="/dashboard">
-                Dashboard
-              </Link>
               <LogOutButton className="nav-link" />
             </>
           )}
           {/* Always show this link since the about page is not protected */}
-          <Link className="nav-link" to="/about">
+          {/* <Link className="nav-link" to="/about">
             About
-          </Link>
+          </Link> */}
           <Button color="inherit" type="submit">About</Button>
 
           {/* <Button color="inherit">Login</Button> */}

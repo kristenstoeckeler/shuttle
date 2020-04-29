@@ -8,8 +8,9 @@ const sessionMiddleware = require('./modules/session-middleware');
 
 const passport = require('./strategies/user.strategy');
 
-// Route includes
+// Route includes KRISTEN! HERE TOO
 const userRouter = require('./routes/user.router');
+const projectRouter = require('./routes/project.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -24,6 +25,7 @@ app.use(passport.session());
 
 /* Routes * KRISTEN! ADD MORE OF YOUR ROUTES HERE */
 app.use('/api/user', userRouter);
+app.use('/api/project', projectRouter);
 
 // Serve static files
 app.use(express.static('build'));
