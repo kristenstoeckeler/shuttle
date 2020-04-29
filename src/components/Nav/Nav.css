@@ -27,10 +27,18 @@
   outline:0;
 }
 
-.nav-link:hover {
-  background-color: #008183;
-}
+
 
 .nav-right {
   float: right;
 } */ 
+
+.input{
+  background-color: white;
+  margin: 5px;
+  padding-left: 4px;
+}
+
+.nav-link:hover {
+  background-color: #008183;
+}
