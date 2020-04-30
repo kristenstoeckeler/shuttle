@@ -6,6 +6,10 @@ import TabMenu from '../TabMenu/TabMenu';
 import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+
+
 
 
 const styles = theme => ({
@@ -23,9 +27,15 @@ const styles = theme => ({
         margin: 5,
         backgroundColor: theme.palette.secondary.dark,
         color: theme.palette.common.white,
+        position: 'right',
     },
     input: {
         backgroundColor: theme.palette.common.white,
+        fontSize: 35,
+        margin: 4,
+        paddingLeft: 10,
+    },
+    typography: {
         fontSize: 35,
         margin: 4,
         paddingLeft: 10,
@@ -36,7 +46,9 @@ const styles = theme => ({
 class newProject extends Component {
     
     state = {
-        project_name: '',
+        project_name: 'Project Name',
+        project_status: false,
+        user_id: this.props.user.id,
     }
 
     handleChange = (event) => {
@@ -44,17 +56,37 @@ class newProject extends Component {
         const value = event.target.value;
 
             this.setState({
-                project_name: value
+                project_name: value,
             });
     }
 
     handleSubmit = () => {
         console.log( 'in handleSubmit');
+        this.setState({
+            project_status: true,
+        })
+
         this.props.dispatch({
-            type: 'CREATE NEW',
+            type: 'CREATE_NEW',
             payload: this.state
         })
-        
+    }
+
+    changeStatus = () => {
+        console.log( 'in changeStatus');
+        this.setState({
+            project_status: false,
+        })
+        return(
+            <form onSubmit={this.handleSubmit}>
+                <TextField
+                    className={this.props.classes.input}
+                    value={this.state.project_name}
+                    onChange={event => this.handleChange(event)}
+                    defaultValue={this.state.project_name}
+                ></TextField>
+            </form>
+        );
     }
 
     render(){
@@ -64,16 +96,23 @@ class newProject extends Component {
         return(
             <>
             <header>
+                    <Button type="submit" onClick={this.handleSubmit} className={classes.button}>Save Project</Button>
+                <div>
+                {this.state.project_status ? 
+                        <>
+                        <Typography className={classes.typography} onClick={this.changeStatus}>{this.state.project_name}</Typography>
+                        </>
+                                
+                :
                 <form onSubmit={this.handleSubmit}>
-                    <h2>{this.state.project_name}</h2>
                     <Input
                         className={classes.input}
-                        placeholder="Project Title"
+                        placeholder={this.state.project_name}
                         onChange={event => this.handleChange(event)}
                     ></Input>
-                    <Button type="submit" className={classes.button} >Save Project</Button>
                 </form>
-
+                }
+                </div>
             </header>
             
             <TabMenu />
@@ -82,4 +121,8 @@ class newProject extends Component {
     }
 }
 
-export default withStyles(styles)(connect()(newProject));
+const putReduxStateOnProps = reduxStore => ({
+    user: reduxStore.user,
+})
+
+export default withStyles(styles)(connect(putReduxStateOnProps)(newProject));

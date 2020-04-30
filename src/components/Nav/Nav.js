@@ -5,6 +5,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import LoginPage from '../LoginPage/LoginPage';
 import Dashboard from '../Dashboard/Dashboard';
 import DashboardButton from '../DashboardButton/DashboardButton';
+import './Nav.css';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -16,7 +17,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
@@ -26,8 +27,18 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+    backgroundColor: theme.palette.secondary.main,
+
   },
-}; 
+  button: {
+    color: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.main,
+  },
+  link: {
+    color: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.main,
+  }
+}); 
 
 function Nav(props){
   const { classes } = props;
@@ -42,6 +53,8 @@ function Nav(props){
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Shuttle: a project tool for handweavers
           </Typography>
+
+          
           {props.user.id ? <DashboardButton/> :
             <>
               <LoginPage className="nav-link" />
@@ -62,10 +75,8 @@ function Nav(props){
             </>
           )}
           {/* Always show this link since the about page is not protected */}
-          {/* <Link className="nav-link" to="/about">
-            About
-          </Link> */}
-          <Button color="inherit" type="submit">About</Button>
+          <Link className="link" to="/about"><Typography variant="h6" color="inherit">ABOUT</Typography>
+          </Link>
 
           {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
