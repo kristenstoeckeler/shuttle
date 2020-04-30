@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router';
+import { withRouter } from 'react-router';
 
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -30,7 +30,7 @@ class NewProjectButton extends Component{
 
     handleSubmit = (event) => {
         console.log( 'in handleSubmit ');
-        event.preventDefault();
+        // event.preventDefault();
         this.props.history.push('/new-project');
     };
 
@@ -38,12 +38,18 @@ class NewProjectButton extends Component{
         const classes = this.props.classes;
         return (
             <>
-            <form onSubmit={this.handleSubmit}>         
-                <Button
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                        <Button
                 className={classes.button}
                 type="submit"
                 ><Icon>add_circle</Icon>Create New Project</Button>
-            </form>
+                </form>
+            </div>
+           
+                       
+
+
             </>
         );
     }
@@ -61,7 +67,7 @@ const putReduxStateOnProps = (reduxStore) => ({
 // because it doesn't care what the current state is.
 // No matter what the redux state is, this button will always be a log out button
 // this component still needs 'connect' though, because it is going to dispatch a redux action
-// export default withStyles(styles)
-// withRouter(connect(putReduxStateOnProps)(NewProjectButton));
 
-export default withStyles(styles)(connect(putReduxStateOnProps)(NewProjectButton));
+export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(NewProjectButton)));
+
+// export default withStyles(styles)(connect(putReduxStateOnProps)(NewProjectButton));

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import UserPage from '../UserPage/UserPage';
 import DashboardGrid from '../DashboardGrid/DashboardGrid';
 import NewProjectButton from '../NewProjectButton/NewProjectButton';
@@ -27,6 +26,7 @@ class Dashboard extends Component {
     ); 
   }
 }
-  
+// export default withStyles(styles)
+// withRouter(connect(putReduxStateOnProps)(NewProjectButton));
 
 export default connect()(Dashboard);
