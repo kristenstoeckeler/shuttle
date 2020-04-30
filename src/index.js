@@ -8,7 +8,34 @@ import logger from 'redux-logger';
 import rootReducer from './redux/reducers'; // imports ./redux/reducers/index.js
 import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
 
+//Material UI imports
+import { ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import lime from '@material-ui/core/colors/lime';
+import red from '@material-ui/core/colors/red';
+import teal from '@material-ui/core/colors/teal';
+import green from '@material-ui/core/colors/green';
+
+
 import App from './components/App/App';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: red[400] },
+    secondary: { 
+      main: teal['A200'],
+      light: lime[500],
+      dark: green['A200'],
+    },
+    error: red,
+    contrastThreshold: 3,
+    tonalOffset: 0.2,
+  },
+  typography: {
+    fontSize: 16
+  },
+});
+
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -32,8 +59,10 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
+  <ThemeProvider theme={theme}>
   <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
+  </ThemeProvider>,
   document.getElementById('react-root'),
 );

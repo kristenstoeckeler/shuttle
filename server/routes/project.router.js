@@ -11,7 +11,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log( 'made it to server project router', req.user);
-    const queryText = 'SELECT "project_name", "date" FROM "project" WHERE "user_id" = $1;'
+    const queryText = 'INSERT INTO "project" ("user_id)" FROM "project" WHERE "user_id" = $1;'
 
     if(req.isAuthenticated()){
         pool.query(queryText, [req.user.id])
@@ -30,8 +30,25 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log( 'made it to server project router POST', req.user);
+    const queryText = 'INSERT INTO "project" ("user_id") VALUES ($1);';
+    pool.query(queryText, [req.user.id])
+    .then((result) => {
+        console.log('Added new project to database');
+        res.sendStatus(201);
+    }).catch((error) => {
+        console.log('Error on project router PUT');
+        res.sendStatus(500);
+    })
+    pool.query(queryText, [req.user.id])
+        .then((result) => {
+            console.log('Added new project to database');
+            res.sendStatus(201);
+        }).catch((error) => {
+            console.log('Error on project router PUT');
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;

@@ -16,6 +16,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import Dashboard from '../Dashboard/Dashboard';
+import NewProject from '../NewProject/NewProject';
 
 import './App.css';
 import 'typeface-roboto';
@@ -56,9 +57,15 @@ class App extends Component {
               path="/home"
               component={Dashboard}
             />
+            <ProtectedRoute 
+              exact
+              path="/new-project"
+              component={NewProject}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
+
           <Footer />
         </div>
       </Router>

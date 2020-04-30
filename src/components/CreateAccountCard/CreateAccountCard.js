@@ -4,28 +4,23 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 
 import Typography from '@material-ui/core/Typography';
 
-const styles = {
+const styles = theme => ({
     card: {
         minWidth: 275,
-        background: '#d95041',
         position: 'relative',
         flexDirection: 'column',
         alignItems: 'center',
         boxShadow: '0px 14px 80px rgba(34, 35, 58, 0.2)',
         margin: 30,
         maxWidth: 300,
-        button: {
-            color: '#d95041',
-        },
+        backgroundColor: "secondary",
     },
-
     bullet: {
         display: 'inline-block',
         margin: '0 2px',
@@ -37,7 +32,12 @@ const styles = {
     pos: {
         marginBottom: 12,
     },
-};
+    button: {
+        marginTop: 15,
+        backgroundColor: theme.palette.secondary.dark,
+        color: theme.palette.common.white,
+    }
+});
 
 class CreateAccountCard extends Component {
     state = {
@@ -74,11 +74,11 @@ class CreateAccountCard extends Component {
     const classes = this.props.classes;
     return (
         <>
-        <Card className={classes.card}>
+        <Card className={classes.card} background-color="secondary">
             <CardContent>
                 <form onSubmit={this.registerUser}>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Create Account
+                        Sign Me Up!
                     </Typography>
                     <div>
                         <Input
@@ -113,7 +113,7 @@ class CreateAccountCard extends Component {
                         </Input>
                     </div>
                     <div>
-                        <Button color="inherit" type="submit">Create Account</Button>
+                        <Button className={classes.button} type="submit">Create Account</Button>
                     </div>
                 </form>
                 <div>

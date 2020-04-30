@@ -18,8 +18,11 @@ class Dashboard extends Component {
           Dashboard
         </h1>
         <UserPage />
-        <NewProjectButton />
-        <DashboardGrid />
+        <div>
+          <NewProjectButton />
+          <DashboardGrid />
+        </div>
+       
       </div>
     ); 
   }

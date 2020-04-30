@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 
 const CustomTableCell = withStyles(theme => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.secondary.dark,
         color: theme.palette.common.white,
     },
     body: {
@@ -27,17 +27,25 @@ const CustomTableCell = withStyles(theme => ({
 
 const styles = theme => ({
     root: {
-        width: '100%',
+        width: '85%',
+        margin: 'auto',
         marginTop: theme.spacing.unit * 3,
         overflowX: 'auto',
+        color: "primary",
     },
     table: {
         minWidth: 700,
     },
     row: {
         '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
+            backgroundColor: theme.palette.common.white,
         },
+    },
+    button: {
+        margin: theme.spacing.unit,
+        backgroundColor: theme.palette.secondary.dark,
+        color: theme.palette.common.white,
+        padding: 5,
     },
 });
 
@@ -75,7 +83,7 @@ class DashboardGrid extends Component {
                                             {project.project_name}
                                         </CustomTableCell>
                                         <CustomTableCell align="right">{project.date}</CustomTableCell>
-                                        <CustomTableCell align="right"><Button>View</Button></CustomTableCell>
+                                        <CustomTableCell align="right"><Button className={classes.button}>View</Button></CustomTableCell>
                                     </TableRow>
                                     </>
                                 );

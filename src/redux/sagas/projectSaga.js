@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_PROJECTS" actions
 function* fetchProject(action) {
-    console.log( 'in fetchProjects saga', action)
+    console.log( 'in fetchProject saga', action)
     try{
         const response = yield axios.get(`/api/project/`)
         console.log( 'here are the user projects from server', response.data);
