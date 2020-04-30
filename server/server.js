@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes KRISTEN! HERE TOO
 const userRouter = require('./routes/user.router');
 const projectRouter = require('./routes/project.router');
+const detailRouter = require('./routes/detail.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -26,6 +27,7 @@ app.use(passport.session());
 /* Routes * KRISTEN! ADD MORE OF YOUR ROUTES HERE */
 app.use('/api/user', userRouter);
 app.use('/api/project', projectRouter);
+app.use('/api/detail', detailRouter);
 
 // Serve static files
 app.use(express.static('build'));

@@ -6,7 +6,7 @@ function* newProject(action) {
     console.log('in createProject saga', action.payload.user_id)
     try {
         yield axios.post(`/api/project/`, action.payload)
-        // yield put({type: 'DETAILS'}); //will need payload?
+        yield put({type: 'DETAILS'}); //will need payload?
     } catch (error) {
         console.log('newProject POST request failed', error);
     }
