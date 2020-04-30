@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
@@ -23,8 +23,14 @@ const styles = {
   },
   button: {
     margin: 5,
+    color: theme.palette.common.white,
+  },
+  input: {
+    backgroundColor: theme.palette.common.white,
+    margin: 4,
+    paddingLeft: 10,
   }
-}; 
+}); 
 
 
 class LoginPage extends Component {
@@ -73,7 +79,7 @@ class LoginPage extends Component {
           <div>
             <Input
               placeholder="username" 
-              className="input" 
+              className={classes.input} 
               type="text" 
               name="username" 
               value={this.state.username}
@@ -82,13 +88,13 @@ class LoginPage extends Component {
             
             <Input
               placeholder="password" 
-              className="input" 
+              className={classes.input} 
               type="text" 
               name="password" 
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}>
             </Input>
-            <Button color="inherit" type="submit">Login</Button>
+            <Button className={classes.button} type="submit">Login</Button>
           </div>
 
           {/* <div>
