@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+
 
 //Material UI Imports
 import { withStyles} from '@material-ui/core/styles';
@@ -53,12 +55,20 @@ class DashboardGrid extends Component {
 
     state = {
         userId: this.props.user.id,
+        projectId: '',
     }
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_PROJECTS', payload: this.state.userId });
     }
 
+    handleClick = (projectName, projectId) => {
+        console.log( 'in handleClick', projectName, projectId );
+        this.props.dispatch({ type: 'WORKING_REDUCER', payload: projectId})
+
+        this.props.history.push(`/draft/${projectName}`)
+        
+    }
 
     render(){
         const classes = this.props.classes;
@@ -83,7 +93,7 @@ class DashboardGrid extends Component {
                                             {project.project_name}
                                         </CustomTableCell>
                                         <CustomTableCell align="right">{project.date}</CustomTableCell>
-                                        <CustomTableCell align="right"><Button className={classes.button}>View</Button></CustomTableCell>
+                                        <CustomTableCell align="right" onClick ={(event) => this.handleClick(project.project_name, project.id)}><Button className={classes.button}>View</Button></CustomTableCell>
                                     </TableRow>
                                     </>
                                 );
@@ -109,5 +119,5 @@ const putReduxStateOnProps = (reduxStore) => ({
     user: reduxStore.user,
 });
 
-export default withStyles(styles)(connect(putReduxStateOnProps)(DashboardGrid));
+export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(DashboardGrid)));
 

@@ -9,15 +9,15 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * GET route template
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log('made it to server project router', req.user);
-    const queryText = 'SELECT * FROM "project" WHERE "user_id" = $1;'
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('made it to server detail router', req.params.id);
+    const queryText = 'SELECT * FROM "project" WHERE "id" = $1;'
 
     if (req.isAuthenticated()) {
-        pool.query(queryText, [req.user.id])
+        pool.query(queryText, [req.params.id])
             .then((result) => {
-                console.log('these are the users projects', result.rows);
-                res.send(result.rows);
+                console.log('these are the details for working projec', result.rows[0]);
+                res.send(result.rows[0]);
             }).catch((error) => {
                 console.log(`Error on query for user projects ${error}`);
                 res.sendStatus(500);

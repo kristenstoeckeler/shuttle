@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+
 
 import Button from '@material-ui/core/Button';
 import { withStyles, withTheme } from '@material-ui/core/styles';
@@ -8,7 +10,7 @@ import PropTypes from 'prop-types';
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
-        color: theme.palette.secondary.main,
+        color: theme.palette.common.white,
     },
     input: {
         display: 'none',
@@ -25,7 +27,7 @@ function DashboardButton(props) {
     return (
         <Button
             className={classes.button}
-            onClick={() => props.dispatch({ type: 'DASHBOARD' })}
+            onClick={() => props.history.push('/home')}
         >Dashboard</Button>
     );
 }
@@ -34,4 +36,4 @@ function DashboardButton(props) {
 // because it doesn't care what the current state is.
 // No matter what the redux state is, this button will always be a log out button
 // this component still needs 'connect' though, because it is going to dispatch a redux action
-export default withStyles(styles)(connect()(DashboardButton));
+export default withStyles(styles)(withRouter(connect()(DashboardButton)));
