@@ -46,9 +46,18 @@ const styles = theme => ({
 class newProject extends Component {
 
     state = {
+        id: this.props.working,
         project_name: 'Project Name',
         project_status: false,
         user_id: this.props.user.id,
+    }
+
+    componentDidMount () {
+        console.log('here is componentDidMount and id', this.props.working)
+        this.props.dispatch({
+            type: 'DETAILS',
+            payload: this.props.working
+        })
     }
 
     handleChange = (event) => {
@@ -65,14 +74,9 @@ class newProject extends Component {
         this.setState({
             project_status: true,
         })
-
-        this.props.dispatch({
-            type: 'DETAILS',
-            payload: this.state
-        })
-        this.props.history.push(`/draft/${this.state.project_name}`)
     }
 
+    //this function conditionally renders the Project Title or TextField to edit project title
     changeStatus = () => {
         console.log('in changeStatus');
         this.setState({
@@ -96,20 +100,21 @@ class newProject extends Component {
 
         return (
             <>
+            {JSON.stringify(this.props.working)}
             {JSON.stringify(this.props.detail)}
                 <header>
                     <Button type="submit" onClick={this.handleSubmit} className={classes.button}>Save Project</Button>
                     <div>
                         {this.state.project_status ?
                             <>
-                                <Typography className={classes.typography} onClick={this.changeStatus}>{this.state.project_name}</Typography>
+                                <Typography className={classes.typography} onClick={this.changeStatus}>{this.props.detail.project_name}</Typography>
                             </>
 
                             :
                             <form onSubmit={this.handleSubmit}>
                                 <Input
                                     className={classes.input}
-                                    placeholder={this.state.project_name}
+                                    placeholder={this.props.detail.project_name}
                                     onChange={event => this.handleChange(event)}
                                 ></Input>
                             </form>
@@ -127,6 +132,7 @@ const putReduxStateOnProps = reduxStore => ({
     user: reduxStore.user,
     project: reduxStore.project,
     detail: reduxStore.detail,
+    working: reduxStore.working,
 })
 
 export default withStyles(styles)(connect(putReduxStateOnProps)(newProject));

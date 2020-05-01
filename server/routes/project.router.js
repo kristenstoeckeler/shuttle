@@ -16,7 +16,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     if(req.isAuthenticated()){
         pool.query(queryText, [req.user.id])
             .then((result) => {
-                console.log('these are the users projects', result.rows);
+                console.log('Users projects came through!');
                 res.send(result.rows);
             }).catch((error) => {
                 console.log(`Error on query for user projects ${error}`);

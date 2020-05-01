@@ -27,16 +27,16 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
-    backgroundColor: theme.palette.secondary.main,
+    // backgroundColor: theme.palette.secondary.main,
 
   },
   button: {
     color: theme.palette.common.white,
-    backgroundColor: theme.palette.secondary.main,
+    // backgroundColor: theme.palette.secondary.main,
   },
   link: {
     color: theme.palette.common.white,
-    backgroundColor: theme.palette.secondary.main,
+    // backgroundColor: theme.palette.secondary.main,
   }
 }); 
 

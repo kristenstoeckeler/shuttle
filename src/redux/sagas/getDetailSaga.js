@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-// worker Saga: will be fired on "GET_DETAIL" actions
+// worker Saga: will be fired on "DETAILS" actions
 function* getProjectDetail(action) {
-    console.log('in getProjectDetail saga', action.payload.user_id)
+    console.log('in getProjectDetail saga', action.payload)
     try {
-        const response = yield axios.get(`/api/detail/`, action.payload)
+        const response = yield axios.get(`/api/detail/${action.payload}`)
         yield put({ type: 'DETAIL_REDUCER', payload: response.data }); 
     } catch (error) {
-        console.log('newProject POST request failed', error);
+        console.log('get Details GET request failed', error);
     }
 }
 
-function* getDetailSaga(action) {
+function* getDetailSaga() {
     yield takeLatest('DETAILS', getProjectDetail);
 }
 
