@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
+        color: theme.palette.secondary.main,
     },
     input: {
         display: 'none',
