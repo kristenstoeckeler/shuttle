@@ -93,7 +93,8 @@ class DashboardGrid extends Component {
                                             {project.project_name}
                                         </CustomTableCell>
                                         <CustomTableCell align="right">{project.date}</CustomTableCell>
-                                        <CustomTableCell align="right" onClick ={(event) => this.handleClick(project.project_name, project.id)}><Button className={classes.button}>View</Button></CustomTableCell>
+                                        <CustomTableCell align="right" onClick ={(event) => this.handleClick(project.project_name, project.id)}>
+                                            <Button className={classes.button}>View</Button></CustomTableCell>
                                     </TableRow>
                                     </>
                                 );

@@ -31,12 +31,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * POST route template
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log( 'made it to server project router POST', req.user, req.body);
-    const queryText = 'INSERT INTO "project" ("user_id", "project_name") VALUES ($1, $2);';
-    pool.query(queryText, [req.user.id, req.body.project_name])
+    console.log( 'made it to server project router POST', req.user, req.body.newProject.project_name);
+    const queryText = 'INSERT INTO "project" ("user_id", "project_name") VALUES ($1, $2) RETURNING id';
+    pool.query(queryText, [req.user.id, req.body.newProject.project_name])
     .then((result) => {
         console.log('Added new project to database');
-        res.sendStatus(201);
+        res.send(result.rows[0])
+        // res.sendStatus(201);
     }).catch((error) => {
         console.log('Error on project router PUT');
         res.sendStatus(500);

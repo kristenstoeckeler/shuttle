@@ -5,8 +5,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import UserPage from '../UserPage/UserPage';
 import Calculator from '../Calculator/Calculator';
+import Notes from '../Notes/Notes';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
     const classes = useStyles();
     //this sets which tab automatically loads
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(3);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -80,7 +80,6 @@ export default function VerticalTabs() {
                 <Tab label="All" {...a11yProps(5)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <div>Warp Calculator</div>
                 <Calculator />
       </TabPanel>
             <TabPanel value={value} index={1}>
@@ -90,7 +89,7 @@ export default function VerticalTabs() {
                 Materials View
       </TabPanel>
             <TabPanel value={value} index={3}>
-                Notes View
+                <Notes />
       </TabPanel>
             <TabPanel value={value} index={4}>
                 Photos View

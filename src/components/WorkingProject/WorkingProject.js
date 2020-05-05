@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -27,7 +28,7 @@ const styles = theme => ({
         margin: 5,
         backgroundColor: theme.palette.secondary.dark,
         color: theme.palette.common.white,
-        position: 'right',
+        align: 'right',
     },
     input: {
         backgroundColor: theme.palette.common.white,
@@ -53,10 +54,11 @@ class newProject extends Component {
     }
 
     componentDidMount () {
-        console.log('here is componentDidMount and id', this.props.working)
+        console.log(this.props.match.params);
+
         this.props.dispatch({
             type: 'DETAILS',
-            payload: this.props.working
+            payload: this.props.match.params
         })
     }
 
@@ -77,22 +79,22 @@ class newProject extends Component {
     }
 
     //this function conditionally renders the Project Title or TextField to edit project title
-    changeStatus = () => {
-        console.log('in changeStatus');
-        this.setState({
-            project_status: false,
-        })
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <TextField
-                    className={this.props.classes.input}
-                    value={this.state.project_name}
-                    onChange={event => this.handleChange(event)}
-                    defaultValue={this.state.project_name}
-                ></TextField>
-            </form>
-        );
-    }
+    // changeStatus = () => {
+    //     console.log('in changeStatus');
+    //     this.setState({
+    //         project_status: false,
+    //     })
+    //     return (
+    //         <form onSubmit={this.handleSubmit}>
+    //             <TextField
+    //                 className={this.props.classes.input}
+    //                 value={this.state.project_name}
+    //                 onChange={event => this.handleChange(event)}
+    //                 defaultValue={this.state.project_name}
+    //             ></TextField>
+    //         </form>
+    //     );
+    // }
 
     render() {
         const classes = this.props.classes;
@@ -100,10 +102,10 @@ class newProject extends Component {
 
         return (
             <>
-            {JSON.stringify(this.props.working)}
-            {JSON.stringify(this.props.detail)}
                 <header>
+                    <Grid align-items-xs-right justify-xs-flex-end>
                     <Button type="submit" onClick={this.handleSubmit} className={classes.button}>Save Project</Button>
+                    </Grid>
                     <div>
                         {this.state.project_status ?
                             <>
@@ -133,6 +135,7 @@ const putReduxStateOnProps = reduxStore => ({
     project: reduxStore.project,
     detail: reduxStore.detail,
     working: reduxStore.working,
+    notes: reduxStore.notes,
 })
 
 export default withStyles(styles)(connect(putReduxStateOnProps)(newProject));

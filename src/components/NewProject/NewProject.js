@@ -61,16 +61,18 @@ class newProject extends Component {
     }
 
     handleSubmit = () => {
-        console.log( 'in handleSubmit');
+        console.log( 'in handleSubmit. Here is state upon creation', this.state);
         this.setState({
             project_status: true,
         })
 
         this.props.dispatch({
             type: 'CREATE_NEW',
-            payload: this.state
+            payload: {
+                newProject: this.state,
+                history: this.props.history
+            }
         })
-        this.props.history.push(`/draft/${this.state.project_name}`)
     }
 
     changeStatus = () => {
@@ -124,6 +126,7 @@ class newProject extends Component {
 
 const putReduxStateOnProps = reduxStore => ({
     user: reduxStore.user,
+    detail: reduxStore.detail,
 })
 
 export default withStyles(styles)(connect(putReduxStateOnProps)(newProject));
