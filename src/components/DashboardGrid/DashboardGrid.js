@@ -66,7 +66,7 @@ class DashboardGrid extends Component {
         console.log( 'in handleClick', projectName, projectId );
         this.props.dispatch({ type: 'WORKING_REDUCER', payload: projectId})
 
-        this.props.history.push(`/draft/${projectName}`)
+        this.props.history.push(`/draft/${projectId}`)
         
     }
 
@@ -93,8 +93,8 @@ class DashboardGrid extends Component {
                                             {project.project_name}
                                         </CustomTableCell>
                                         <CustomTableCell align="right">{project.date}</CustomTableCell>
-                                        <CustomTableCell align="right" onClick ={(event) => this.handleClick(project.project_name, project.id)}>
-                                            <Button className={classes.button}>View</Button></CustomTableCell>
+                                        <CustomTableCell align="right" onClick ={() => this.handleClick(project.project_name, project.id)}>
+                                        <Button className={classes.button}>View</Button></CustomTableCell>
                                     </TableRow>
                                     </>
                                 );

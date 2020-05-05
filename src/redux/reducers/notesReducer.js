@@ -1,5 +1,5 @@
-const notesReducer = (state = [], action) => {
-    console.log('in notesReducer', action.payload);
+const notesReducer = (state = {}, action) => {
+    // console.log('in notesReducer', action.payload);
     if (action.type === 'NOTES') {
         return [action.payload];
     }
