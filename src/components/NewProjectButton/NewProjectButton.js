@@ -6,6 +6,12 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Icon from '@material-ui/core/Icon';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = theme => ({
     button: {
@@ -28,28 +34,88 @@ const styles = theme => ({
 
 class NewProjectButton extends Component{
 
+    state = {
+        open: false,
+        name: ''
+    };
+
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+
+    handleCancel = () => {
+        this.setState({ open: false });
+    };
+
+    handleChange = (event) => {
+        this.setState({
+            name: event.target.value
+        })
+    }
+
     handleSubmit = (event) => {
-        console.log( 'in handleSubmit ');
+        console.log( 'right before dispatch. Here is state.name ', this.state.name);
         // event.preventDefault();
-        this.props.history.push('/new-project');
+
+        this.setState({
+            open: false,
+        });
+
+        this.props.dispatch({
+            type: 'CREATE_NEW',
+            payload: {
+                name: this.state.name,
+                history: this.props.history
+            }
+        });
+
+        this.props.history.push('/draft');
     };
 
     render(){
         const classes = this.props.classes;
+        console.log( 'heres state', this.state)
         return (
             <>
             <div>
-                <form onSubmit={this.handleSubmit}>
-                        <Button
+                <Button
                 className={classes.button}
                 type="submit"
+                onClick={this.handleClickOpen}
                 ><Icon>add_circle</Icon>Create New Project</Button>
-                </form>
             </div>
-           
-                       
-
-
+            <div>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">Create a New Project!</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Give a name to your project!
+                        </DialogContentText>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Project"
+                            type="text"
+                            fullWidth
+                            onChange={event => this.handleChange(event)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleCancel} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.handleSubmit} color="primary">
+                            Create
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+           </div>
             </>
         );
     }
@@ -62,6 +128,7 @@ NewProjectButton.propTypes = {
 
 const putReduxStateOnProps = (reduxStore) => ({
     user: reduxStore.user,
+    name: reduxStore.name,
 })
 // This component doesn't need 'mapStateToProps'
 // because it doesn't care what the current state is.

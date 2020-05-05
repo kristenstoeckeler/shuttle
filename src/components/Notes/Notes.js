@@ -87,7 +87,7 @@ class Notes extends Component {
                         
             <TextField
                 id="standard-textarea"
-                defaultValue={this.props.notes}
+                defaultValue={this.props.detail.notes}
                 multiline
                 className={classes.textField}
                 margin="normal"

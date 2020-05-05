@@ -37,10 +37,10 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         "warp_length_in", "weaving_length_tension_in", "weaving_length_relaxed_in", 
         "width_in_reed_in", "warp_ends", "warp_total_yds", "warp_total_oz", 
         "ppi", "weft_takeup_percent", "weft_ypp", "weft_total_yds", 
-        "weft_total_oz") 
+        "weft_total_oz", "notes") 
         = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 
-        $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24) 
-        WHERE "id" = $25;`
+        $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25) 
+        WHERE "id" = $26;`
 
     if (req.isAuthenticated()) {
         pool.query(queryText, [req.body.finished_length_in, req.body.quantity, req.body.fringe_length_in, 
@@ -49,7 +49,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             req.body.warp_yards_per_lb, req.body.warp_length_in, req.body.weaving_length_tension_in, 
             req.body.weaving_length_relaxed_in, req.body.width_in_reed_in, req.body.warp_ends, req.body.warp_total_yds,
             req.body.warp_total_oz, req.body.ppi, req.body.weft_takeup_percent, req.body.weft_ypp, req.body.weft_total_yds,
-            req.body.weft_total_oz, req.params.id])
+            req.body.weft_total_oz, req.body.notes, req.params.id])
             .then((result) => {
                 res.sendStatus(200);
             }).catch((error) => {

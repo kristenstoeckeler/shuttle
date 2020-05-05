@@ -14,9 +14,9 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+// import UserPage from '../UserPage/UserPage';
 import Dashboard from '../Dashboard/Dashboard';
-import NewProject from '../NewProject/NewProject';
+// import NewProject from '../NewProject/NewProject';
 import WorkingProject from '../WorkingProject/WorkingProject';
 
 import './App.css';
@@ -58,15 +58,19 @@ class App extends Component {
               path="/home"
               component={Dashboard}
             /> */}
-            <ProtectedRoute 
+            {/* <ProtectedRoute 
               exact
               path="/new-project"
               component={NewProject}
-            />
+            /> */}
             <ProtectedRoute
               exact
               path="/draft/:id"
               component={WorkingProject}
+              
+
+
+
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

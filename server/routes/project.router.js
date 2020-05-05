@@ -31,9 +31,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * POST route template
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log( 'made it to server project router POST', req.user, req.body.newProject.project_name);
+    console.log( 'made it to server project router POST', req.user, req.body.name);
     const queryText = 'INSERT INTO "project" ("user_id", "project_name") VALUES ($1, $2) RETURNING id';
-    pool.query(queryText, [req.user.id, req.body.newProject.project_name])
+    pool.query(queryText, [req.user.id, req.body.name])
     .then((result) => {
         console.log('Added new project to database');
         res.send(result.rows[0])
@@ -42,6 +42,19 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         console.log('Error on project router PUT');
         res.sendStatus(500);
     })
+});
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('made it to server project router DELETE', req.params);
+    const queryText = 'DELETE FROM "project" WHERE "id" = $1;';
+    pool.query(queryText, [req.params.id])
+        .then((result) => {
+            console.log('Deleted project from database');
+            res.sendStatus(200)
+        }).catch((error) => {
+            console.log('Error on project router DELETE');
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;
