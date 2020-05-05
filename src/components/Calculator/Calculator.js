@@ -75,36 +75,40 @@ const styles = theme => ({
 
 class Calculator extends Component {
 
-    state = {
+    state = ({
+        id: this.props.detail.id,
         project_name: 'Project Name',
         project_status: false,
         user_id: this.props.user.id,
-        finished_length_in: 0,
-        quantity: 0,
-        fringe_length_in: 0,
-        sampling_length_in: 0,
-        loom_waste_in: 24,
-        warp_takeup_percent: 10,
-        length_shrinkage_percent: 10,
-        finished_width_in: 0,
-        width_shrinkage_percent: 10,
-        sett: 0,
-        extra_ends: 0,
-        warp_yards_per_lb: 0,
-        warp_length_in: 0,
-        weaving_length_tension_in: 0,
-        weaving_length_relaxed_in: 0,
-        width_in_reed_in: 0,
-        warp_ends: 0,
-        warp_total_yds: 0,
-        warp_total_oz: 0,
-        ppi: 0,
-        weft_takeup_percent: 10,
-        weft_ypp: 0,
-        weft_total_yds: 0,
-        weft_total_oz: 0,
+        finished_length_in: Number(0),
+        quantity: Number(0),
+        fringe_length_in: Number(0),
+        sampling_length_in: Number(0),
+        loom_waste_in: Number(24),
+        warp_takeup_percent: Number(10),
+        length_shrinkage_percent: Number(10),
+        finished_width_in: Number(0),
+        width_shrinkage_percent: Number(10),
+        sett: Number(0),
+        extra_ends: Number(0),
+        warp_yards_per_lb: Number(0),
+        warp_length_in: Number(0),
+        weaving_length_tension_in: Number(0),
+        weaving_length_relaxed_in: Number(0),
+        width_in_reed_in: Number(0),
+        warp_ends: Number(0),
+        warp_total_yds: Number(0),
+        warp_total_oz: Number(0),
+        ppi: Number(0),
+        weft_takeup_percent: Number(10),
+        weft_ypp: Number(0),
+        weft_total_yds: Number(0),
+        weft_total_oz: Number(0),
+    })
 
-    }
+    // componentDidMount() {
+    //     this.props.dispatch({ type: 'FETCH_PROJECTS', payload: this.state.userId });
+    // }
 
     handleChange = (event, propertyName) => {
         event.preventDefault();
@@ -114,17 +118,6 @@ class Calculator extends Component {
         });
     }
 
-    handleSubmit = () => {
-        console.log('in handleSubmit');
-        this.setState({
-            project_status: true,
-        })
-
-        this.props.dispatch({
-            type: 'CREATE_NEW',
-            payload: this.state
-        })
-    }
 
     handleClick = () => {
         console.log('in handleClick to CALCULATE');
@@ -138,39 +131,33 @@ class Calculator extends Component {
         
         const numberOfEnds =
              totalWidthInches * Number(this.state.sett) + Number(this.state.extra_ends);
-        
-        const totalYardage = 
-            totalLengthInches * numberOfEnds
+        console.log('here is numberOfEnds', numberOfEnds);
 
-        console.log( 'here is total warp yardage', totalYardage);
-       
-        // quantity: 0,
-   
-             
-               
-        //                 warp_takeup_percent: 10,
-        //                     length_shrinkage_percent: 10,
-        //                             width_shrinkage_percent: 10,
-        //                                         warp_yards_per_lb: 0,
+        const totalInches = 
+            totalLengthInches * numberOfEnds;
+        console.log('here is totalInches', totalInches);
 
-    }
+        const totalYards = Math.round((totalInches / 36) *100) / 100;
+        console.log('here is totalYards', totalYards);
 
-    changeStatus = () => {
-        console.log('in changeStatus');
+        this.props.dispatch({
+            type: 'UPDATE_PROJECT', 
+            payload: {
+                ...this.state, warp_length_in: totalInches,
+                width_in_reed_in: totalWidthInches,
+                warp_ends: numberOfEnds,
+                warp_total_yds: totalYards
+            }
+        });
+
         this.setState({
-            project_status: false,
-        })
-        // return (
-        //     <form onSubmit={this.handleSubmit}>
-        //         <TextField
-        //             className={this.props.classes.input}
-        //             value={this.state.weft_total_oz}
-        //             onChange={event => this.handleChange(event)}
-        //             defaultValue={this.state.project_name}
-        //         ></TextField>
-        //     </form>
-        // );
+            warp_length_in: totalInches,
+            width_in_reed_in: totalWidthInches,
+            warp_ends: numberOfEnds,
+            warp_total_yds: totalYards,
+        });
     }
+
 
     render() {
         const classes = this.props.classes;
@@ -187,6 +174,7 @@ class Calculator extends Component {
                             margin="normal"
                             variant="outlined"
                             size="small"
+                            type="Number"
                             onChange={event => this.handleChange(event, 'finished_length_in')}
                         />
                     </Grid>
@@ -203,6 +191,7 @@ class Calculator extends Component {
                             margin="normal"
                             variant="outlined"
                             size="small"
+                            type="Number"
                             onChange={event => this.handleChange(event, 'quantity')}
                         />
                     </Grid>
@@ -219,6 +208,7 @@ class Calculator extends Component {
                             margin="normal"
                             variant="outlined"
                             size="small"
+                            type="number"
                             onChange={event => this.handleChange(event, 'fringe_length_in')}
                         />
                     </Grid>
@@ -388,7 +378,16 @@ class Calculator extends Component {
                             onClick={() => this.handleClick()}
                      >Calculate Warp</Button>
                     </Grid>
-                </Grid>          
+                </Grid>  
+                <Grid container direction="row" alignItems="center">
+                    <Grid item>
+                        <h3>Warp Calculations</h3>
+                        <ul>
+                            <li>Total warp (yards): {this.props.detail.warp_total_yds} yards</li>
+                            <li>Total warp (ounces): {this.props.detail.warp_total_oz} yards</li>
+                        </ul>
+                    </Grid>
+                </Grid>  
             </>
         );
     }
@@ -400,6 +399,8 @@ Calculator.propTypes = {
 
 const putReduxStateOnProps = reduxStore => ({
     user: reduxStore.user,
+    detail: reduxStore.detail,
+    working: reduxStore.working,
 })
 
 export default withStyles(styles)(connect(putReduxStateOnProps)(Calculator));
