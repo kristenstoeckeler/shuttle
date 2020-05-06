@@ -62,29 +62,28 @@ class ProjectHeader extends Component {
         sampling_length_in: this.props.detail.sampling_length_in,
         loom_waste_in: this.props.detail.loom_waste_in,
         warp_takeup_percent: this.props.detail.warp_takeup_percent,
-        length_shrinkage_percent: Number(10),
-        finished_width_in: Number(0),
-        width_shrinkage_percent: Number(10),
-        sett: Number(0),
-        extra_ends: Number(0),
-        warp_yards_per_lb: Number(0),
-        warp_length_in: Number(0),
-        weaving_length_tension_in: Number(0),
-        weaving_length_relaxed_in: Number(0),
-        width_in_reed_in: Number(0),
-        warp_ends: Number(0),
-        warp_total_yds: Number(0),
-        warp_total_oz: Number(0),
-        ppi: Number(0),
-        weft_takeup_percent: Number(10),
-        weft_ypp: Number(0),
-        weft_total_yds: Number(0),
-        weft_total_oz: Number(0),
+        length_shrinkage_percent: this.props.detail.length_shrinkage_percent,
+        finished_width_in: this.props.detail.finished_width_in,
+        width_shrinkage_percent: this.props.detail.width_shrinkage_percent,
+        sett: this.props.detail.sett,
+        extra_ends: this.props.detail.extra_ends,
+        warp_yards_per_lb: this.props.detail.warp_yards_per_lb,
+        warp_length_in: this.props.detail.warp_length_in,
+        weaving_length_tension_in: this.props.detail.weaving_length_tension_in,
+        weaving_length_relaxed_in: this.props.detail.weaving_length_relaxed_in,
+        width_in_reed_in: this.props.detail.width_in_reed_in,
+        warp_ends: this.props.detail.warp_ends,
+        warp_total_yds: this.props.detail.warp_total_yds,
+        warp_total_oz: this.props.detail.warp_total_oz,
+        ppi: this.props.detail.ppi,
+        weft_takeup_percent: this.props.detail.weft_takeup_percent,
+        weft_ypp: this.props.detail.weft_ypp,
+        weft_total_yds: this.props.detail.weft_total_yds,
+        weft_total_oz: this.props.detail.weft_total_oz,
         notes: this.props.notes,
     }
 
     componentDidMount() {
-        console.log('KRISTEN namereducer', this.props.name);
         this.props.dispatch({
             type: 'DETAILS',
             payload: this.props.match.params
@@ -99,16 +98,53 @@ class ProjectHeader extends Component {
     }
 
     handleSubmit = () => {
+        
+        this.setState({
+            id: this.props.detail.id,
+            project_name: this.props.detail.project_name,
+            user_id: this.props.user.id,
+            project_status: false,
+            finished_length_in: this.props.detail.finished_length_in,
+            quantity: this.props.detail.quantity,
+            fringe_length_in: this.props.detail.fringe_length_in,
+            sampling_length_in: this.props.detail.sampling_length_in,
+            loom_waste_in: this.props.detail.loom_waste_in,
+            warp_takeup_percent: this.props.detail.warp_takeup_percent,
+            length_shrinkage_percent: this.props.detail.length_shrinkage_percent,
+            finished_width_in: this.props.detail.finished_width_in,
+            width_shrinkage_percent: this.props.detail.width_shrinkage_percent,
+            sett: this.props.detail.sett,
+            extra_ends: this.props.detail.extra_ends,
+            warp_yards_per_lb: this.props.detail.warp_yards_per_lb,
+            warp_length_in: this.props.detail.warp_length_in,
+            weaving_length_tension_in: this.props.detail.weaving_length_tension_in,
+            weaving_length_relaxed_in: this.props.detail.weaving_length_relaxed_in,
+            width_in_reed_in: this.props.detail.width_in_reed_in,
+            warp_ends: this.props.detail.warp_ends,
+            warp_total_yds: this.props.detail.warp_total_yds,
+            warp_total_oz: this.props.detail.warp_total_oz,
+            ppi: this.props.detail.ppi,
+            weft_takeup_percent: this.props.detail.weft_takeup_percent,
+            weft_ypp: this.props.detail.weft_ypp,
+            weft_total_yds: this.props.detail.weft_total_yds,
+            weft_total_oz: this.props.detail.weft_total_oz,
+            notes: this.props.notes,
+        })
+
         this.props.dispatch({
             type: 'UPDATE_PROJECT',
-            payload: this.state,
+            payload: {
+                projectId: this.props.match.params,
+                projectDetails: this.props.detail,
+                projectNotes: this.props.notes,
+            }
+        
         })
     }
 
 
     render() {
         const classes = this.props.classes;
-        console.log('here is new state:', this.state);
         return (
             <>
             <header>
@@ -141,7 +177,7 @@ const putReduxStateOnProps = reduxStore => ({
     detail: reduxStore.detail,
     working: reduxStore.working,
     notes: reduxStore.notes,
-    name: reduxStore.name,
+    id: reduxStore.id,
 })
 
 export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(ProjectHeader)));

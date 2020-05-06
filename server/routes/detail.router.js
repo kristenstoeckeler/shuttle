@@ -28,7 +28,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('made it to server detail router for PUT', req.body.quantity, req.params.id);
+    console.log('made it to server detail router for PUT', req.body, req.params.id);
     const queryText = 
         `UPDATE "project" SET ("finished_length_in", "quantity", 
         "fringe_length_in", "sampling_length_in", "loom_waste_in", 
@@ -43,13 +43,19 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         WHERE "id" = $26;`
 
     if (req.isAuthenticated()) {
-        pool.query(queryText, [req.body.finished_length_in, req.body.quantity, req.body.fringe_length_in, 
-            req.body.sampling_length_in, req.body.loom_waste_in, req.body.warp_takeup_percent, req.body.length_shrinkage_percent,
-            req.body.finished_width_in, req.body.width_shrinkage_percent, req.body.sett, req.body.extra_ends,
-            req.body.warp_yards_per_lb, req.body.warp_length_in, req.body.weaving_length_tension_in, 
-            req.body.weaving_length_relaxed_in, req.body.width_in_reed_in, req.body.warp_ends, req.body.warp_total_yds,
-            req.body.warp_total_oz, req.body.ppi, req.body.weft_takeup_percent, req.body.weft_ypp, req.body.weft_total_yds,
-            req.body.weft_total_oz, req.body.notes, req.params.id])
+        pool.query(queryText, [req.body.projectDetails.finished_length_in, req.body.projectDetails.quantity, req.body.projectDetails.fringe_length_in, 
+            req.body.projectDetails.sampling_length_in, req.body.projectDetails.loom_waste_in, req.body.projectDetails.warp_takeup_percent, 
+            req.body.projectDetails.length_shrinkage_percent,
+            req.body.projectDetails.finished_width_in, req.body.projectDetails.width_shrinkage_percent, 
+            req.body.projectDetails.sett, req.body.projectDetails.extra_ends,
+            req.body.projectDetails.warp_yards_per_lb, req.body.projectDetails.warp_length_in, 
+            req.body.projectDetails.weaving_length_tension_in, 
+            req.body.projectDetails.weaving_length_relaxed_in, req.body.projectDetails.width_in_reed_in, 
+            req.body.projectDetails.warp_ends, req.body.projectDetails.warp_total_yds,
+            req.body.projectDetails.warp_total_oz, req.body.projectDetails.ppi, 
+            req.body.projectDetails.weft_takeup_percent, req.body.projectDetails.weft_ypp, 
+            req.body.projectDetails.weft_total_yds,
+            req.body.projectDetails.weft_total_oz, req.body.projectNotes, req.params.id])
             .then((result) => {
                 res.sendStatus(200);
             }).catch((error) => {

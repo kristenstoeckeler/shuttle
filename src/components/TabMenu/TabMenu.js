@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
     const classes = useStyles();
     //this sets which tab automatically loads
-    const [value, setValue] = React.useState(3);
+    const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

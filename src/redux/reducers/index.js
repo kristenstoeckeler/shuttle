@@ -6,7 +6,7 @@ import project from './projectReducer';
 import detail from './detailReducer';
 import working from './workingReducer';
 import notes from './notesReducer';
-import name from './nameReducer.js';
+import id from './idReducer.js';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   detail,
   working,
   notes,
-  name,
+  id,
 });
 
 export default rootReducer;

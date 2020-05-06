@@ -7,7 +7,7 @@ function* newProject(action) {
     try {
         const response = yield axios.post(`/api/project/`, action.payload)
         console.log(' here is response.data', response.data);
-        yield put({type: 'NAME', payload: action.payload.name});
+        yield put({type: 'ID', payload: response.data});
         action.payload.history.push(`/draft/${response.data.id}`)
     } catch (error) {
         console.log('newProject POST request failed', error);

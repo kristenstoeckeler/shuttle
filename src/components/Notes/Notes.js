@@ -62,10 +62,6 @@ const styles = theme => ({
         margin: 4,
         paddingLeft: 10,
     },
-
-    // float: {
-    //     position: 'bottom',
-    // }
 });
 
 
@@ -83,8 +79,7 @@ class Notes extends Component {
         const classes = this.props.classes;
         return(
             <>
-            <h2>NOTES</h2>
-                        
+            <h3>NOTES</h3>    
             <TextField
                 id="standard-textarea"
                 defaultValue={this.props.detail.notes}
