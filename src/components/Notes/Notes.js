@@ -67,6 +67,8 @@ const styles = theme => ({
 
 class Notes extends Component {
 
+    
+
     handleChange = (event) => {
         console.log( 'in handleChange', event.target.value);
         this.props.dispatch({

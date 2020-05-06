@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DraftFile from '../DraftFile/DraftFile';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -57,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
     const classes = useStyles();
     //this sets which tab automatically loads
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(1);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -85,6 +87,7 @@ export default function VerticalTabs() {
       </TabPanel>
             <TabPanel value={value} index={1}>
                 Draft View
+                <DraftFile />
       </TabPanel>
             <TabPanel value={value} index={2}>
                 Materials View

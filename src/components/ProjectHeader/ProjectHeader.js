@@ -52,7 +52,7 @@ const styles = theme => ({
 class ProjectHeader extends Component {
 
     state = {
-        id: this.props.detail.id,
+        id: this.props.match.params,
         project_name: this.props.detail.project_name,
         user_id: this.props.user.id,
         project_status: false,
@@ -84,6 +84,8 @@ class ProjectHeader extends Component {
     }
 
     componentDidMount() {
+        console.log( 'in componentDidMount Project Header');
+        
         this.props.dispatch({
             type: 'DETAILS',
             payload: this.props.match.params
@@ -144,11 +146,15 @@ class ProjectHeader extends Component {
 
 
     render() {
+        console.log( 'rendering project header');
+        
         const classes = this.props.classes;
         return (
             <>
             <header>
+                {JSON.stringify(this.props.detail)}
                 {JSON.stringify(this.props.notes)}
+                
                 <Grid align-items-xs-right justify-xs-flex-end>
                     <Button type="submit" onClick={this.handleSubmit} className={classes.button}>Save Project</Button>
                 </Grid>
