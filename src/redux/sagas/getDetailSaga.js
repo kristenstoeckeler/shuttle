@@ -7,6 +7,7 @@ function* getProjectDetail(action) {
     try {
         const response = yield axios.get(`/api/detail/${action.payload.id}`)
         yield put({ type: 'DETAIL_REDUCER', payload: response.data }); 
+        yield put({ type: 'NOTES', payload: response.data.notes })
     } catch (error) {
         console.log('get Details GET request failed', error);
     }
