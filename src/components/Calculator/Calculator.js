@@ -31,6 +31,9 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
     },
+    weft: {
+        // marginLeft: 250,
+    },
     dense: {
         marginTop: 16,
     },
@@ -43,12 +46,24 @@ const styles = theme => ({
     grow: {
         flexGrow: 1,
     },
+    header: {
+        marginLeft: 300,
+    },
+    h2: {
+        fontSize: 3
+    },
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
     },
     button: {
         margin: 5,
+        backgroundColor: theme.palette.secondary.dark,
+        color: theme.palette.common.white,
+        position: 'right',
+    },
+    floatButton: {
+        // marginLeft: 200,
         backgroundColor: theme.palette.secondary.dark,
         color: theme.palette.common.white,
         position: 'right',
@@ -66,10 +81,10 @@ const styles = theme => ({
     },
     textField: {
         margin: 3,
-    }
-    // float: {
-    //     position: 'bottom',
-    // }
+    },
+    float: {
+        marginRight: 200,
+    },
 });
 
 
@@ -114,13 +129,18 @@ class Calculator extends Component {
         event.preventDefault();
 
         this.setState({
+            ...this.state,
             [propertyName]: event.target.value,
         });
     }
 
+    handleClickWeft = () => {
+        console.log('in handleClickWeft')
+    }
+
 
     handleClick = () => {
-        console.log('in handleClick to CALCULATE');
+        // console.log('in handleClick to CALCULATE');
         
         const weavingLength = Number(this.state.finished_length_in) + Number(this.state.sampling_length_in);
         const takeupFactorLength = weavingLength / Number(this.state.warp_takeup_percent);
@@ -130,7 +150,7 @@ class Calculator extends Component {
         const totalWidthInches = Number(this.state.finished_width_in) + takeupFactorWidth;
         
         const numberOfEnds =
-             totalWidthInches * Number(this.state.sett) + Number(this.state.extra_ends);
+            totalWidthInches * Number(this.state.sett) + Number(this.state.extra_ends);
         console.log('here is numberOfEnds', numberOfEnds);
 
         const totalInches = 
@@ -139,14 +159,17 @@ class Calculator extends Component {
 
         const totalYards = Math.round((totalInches / 36) *100) / 100;
         console.log('here is totalYards', totalYards);
+    
+        console.log('here is this.state.projectDetails', this.state)
 
         this.props.dispatch({
-            type: 'UPDATE_PROJECT', 
+            type: 'DETAIL_REDUCER', 
             payload: {
-                ...this.state, warp_length_in: totalInches,
-                width_in_reed_in: totalWidthInches,
-                warp_ends: numberOfEnds,
-                warp_total_yds: totalYards
+                ...this.state,
+                    warp_length_in: totalInches,
+                    width_in_reed_in: totalWidthInches,
+                    warp_ends: numberOfEnds,
+                    warp_total_yds: totalYards
             }
         });
 
@@ -165,8 +188,17 @@ class Calculator extends Component {
 
         return (
             <>
+                <Grid container direction="row" alignItems="center" spacing={7}>
+
+                    <Grid item xs={12} sm={6} className="header">
+                        <h3>Warp Calculator</h3>  
+                    </Grid>
+                    <Grid item xs={12} sm={6} className="header">
+                        <h3 >Weft Calculator</h3>
+                    </Grid>
+                </Grid>
                 <Grid container direction="row" alignItems="center">
-                    <Grid item >
+                    <Grid item xs={6} sm={3}>
                         <TextField
                             id="outlined-with-placeholder"
                             label="finished length of piece"
@@ -178,12 +210,29 @@ class Calculator extends Component {
                             onChange={event => this.handleChange(event, 'finished_length_in')}
                         />
                     </Grid>
-                    <Grid item>
-                        <Typography className="float">inches (include hems)</Typography>
+                    
+                    <Grid item xs={6} sm={3}>
+                        <Typography className="float" xs={6} sm={3}>inches (include hems)</Typography>
+                    </Grid>
+
+                    <Grid item xs={6} sm={3}>
+                        <TextField
+                            id="outlined-with-placeholder"
+                            label="ppi"
+                            className={classes.weft}
+                            margin="normal"
+                            variant="outlined"
+                            size="small"
+                            type="Number"
+                            onChange={event => this.handleChange(event, 'ppi')}
+                        />
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                        <Typography className="float">picks per inch</Typography>
                     </Grid>
                 </Grid>
                 <Grid container direction="row" alignItems="center">
-                    <Grid item>
+                    <Grid item xs={6} sm={3}>
                         <TextField
                             id="outlined-with-placeholder"
                             label="quantity"
@@ -195,12 +244,27 @@ class Calculator extends Component {
                             onChange={event => this.handleChange(event, 'quantity')}
                         />
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={6} sm={3}>
                         <Typography className="float">number of items</Typography>
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                        <TextField
+                            id="outlined-with-placeholder"
+                            label="takeup"
+                            className={classes.weft}
+                            margin="normal"
+                            variant="outlined"
+                            size="small"
+                            type="Number"
+                            onChange={event => this.handleChange(event, 'weft_takeup_percent')}
+                        />
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                        <Typography className="float">%</Typography>
                     </Grid>
                 </Grid>
                 <Grid container direction="row" alignItems="center">
-                    <Grid item>
+                    <Grid item xs={6} sm={3}>
                         <TextField
                             id="outlined-with-placeholder"
                             label="fringe length"
@@ -212,12 +276,27 @@ class Calculator extends Component {
                             onChange={event => this.handleChange(event, 'fringe_length_in')}
                         />
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={6} sm={3}>
                         <Typography className="float" size="small">inches</Typography>
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                        <TextField
+                            id="outlined-with-placeholder"
+                            label="yards per lb."
+                            className={classes.weft}
+                            margin="normal"
+                            variant="outlined"
+                            size="small"
+                            type="Number"
+                            onChange={event => this.handleChange(event, 'weft_ypp')}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <Typography className="float" xs={6} sm={3}>ypp (yards per lb.)</Typography>
                     </Grid>
                 </Grid>
                 <Grid container direction="row" alignItems="center">
-                    <Grid item>
+                    <Grid item xs={6} sm={3}>
                         <TextField
                             id="outlined-with-placeholder"
                             label="sampling length"
@@ -228,8 +307,14 @@ class Calculator extends Component {
                             onChange={event => this.handleChange(event, 'sampling_length_in')}
                         />
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={6} sm={3}>
                         <Typography className="float" size="small">inches</Typography>
+                    </Grid>
+                    <Grid item xs={6} sm={3}>
+                        <Button
+                            className={classes.floatButton}
+                            onClick={() => this.handleClickWeft()}
+                        >Calculate Weft</Button>
                     </Grid>
                 </Grid>
                 <Grid container direction="row" alignItems="center">
