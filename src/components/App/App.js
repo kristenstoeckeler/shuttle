@@ -53,24 +53,10 @@ class App extends Component {
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the Dashboard page instead. */}
-            {/* <ProtectedRoute
-              exact
-              path="/home"
-              component={Dashboard}
-            /> */}
-            {/* <ProtectedRoute 
-              exact
-              path="/new-project"
-              component={NewProject}
-            /> */}
             <ProtectedRoute
               exact
               path="/draft/:id"
               component={WorkingProject}
-              
-
-
-
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

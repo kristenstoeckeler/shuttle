@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import CreateAccountCard from '../CreateAccountCard/CreateAccountCard';
+import Image from '../shuttle.jpeg'; 
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = {
+  root: {
+    backgroundImage: `url(${Image})`,
+    backgroundRepeat: 'no-repeat',
+    padding: 50,
+    height: 1000,
+  }
+};
 
 class RegisterPage extends Component {
   state = {
@@ -31,57 +43,24 @@ class RegisterPage extends Component {
   }
 
   render() {
+    const classes = this.props.classes;
     return (
       <>
       <div>
-        <center>
+        <center className={classes.root}>
             <CreateAccountCard />
         </center>
 
       </div>
-      
-      {/* <div>
-        
-        {this.props.errors.registrationMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
-            {this.props.errors.registrationMessage}
-          </h2>
-        )}
-         */}
-        {/* <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
-            Login
-          </button>
-        </center> */}
-
-        {/* <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
-          >
-            Register
-          </button>
-        </center> */}
-      {/* </div> */}
       </>
     );
   }
 }
 
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
+
 const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(RegisterPage);
+export default withStyles(styles)(connect(mapStateToProps)(RegisterPage));
 

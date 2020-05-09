@@ -106,7 +106,7 @@ class CreateAccountCard extends Component {
                         <Input
                             placeholder="password"
                             className="input"
-                            type="text"
+                            type="password"
                             name="password"
                             value={this.state.password}
                             onChange={this.handleInputChangeFor('password')}>

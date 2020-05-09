@@ -10,6 +10,10 @@ import Box from '@material-ui/core/Box';
 import Calculator from '../Calculator/Calculator';
 import Notes from '../Notes/Notes';
 import DeleteButton from '../DeleteButton/DeleteButton';
+import ParamsCard from '../ParamsCard/ParamsCard';
+import Grid from '@material-ui/core/Grid';
+import ProjectFooter from '../ProjectFooter/ProjectFooter';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -49,8 +53,15 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
         display: 'flex',
-        height: 500,
-    },
+        height: 'flex',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        paddingTop: 30,
+        paddingBottom: 50,
+        paddingLeft: 150,
+        paddingRight: 5,
+        border: 5,
+        },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
     },
@@ -59,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
     const classes = useStyles();
     //this sets which tab automatically loads
-    const [value, setValue] = React.useState(1);
+    const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -78,30 +89,38 @@ export default function VerticalTabs() {
                 <Tab label="Calculator" {...a11yProps(0)} />
                 <Tab label="Draft" {...a11yProps(1)} />
                 <Tab label="Materials" {...a11yProps(2)} />
-                <Tab label="Notes" {...a11yProps(3)} />
+                <Tab label="Notes" {...a11yProps(2)} />
                 <Tab label="Photos" {...a11yProps(4)} />
-                <Tab label="All" {...a11yProps(5)} />
+                <Tab label="All" {...a11yProps(3)} />
             </Tabs>
             <TabPanel value={value} index={0}>
                 <Calculator />
-      </TabPanel>
+            </TabPanel>
             <TabPanel value={value} index={1}>
-                Draft View
                 <DraftFile />
-      </TabPanel>
+            </TabPanel>
             <TabPanel value={value} index={2}>
-                Materials View
-      </TabPanel>
+                    Materials View
+            </TabPanel>
             <TabPanel value={value} index={3}>
                 <Notes />
-      </TabPanel>
+            </TabPanel>
             <TabPanel value={value} index={4}>
                 Photos View
-      </TabPanel>
+            </TabPanel>
             <TabPanel value={value} index={5}>
-                <Calculator />
+                <Grid className={classes.grid}>
+                    <Grid item>
+                        <DraftFile />
+                    </Grid>
+                    <Grid item>
+                        <ParamsCard />
+                    </Grid>
+                </Grid>
                 <Notes />
-                <DeleteButton />
+                <Grid>
+                    <ProjectFooter />
+                </Grid>
       </TabPanel>
         </div>
     );

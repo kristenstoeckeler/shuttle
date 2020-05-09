@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import InputBase from '@material-ui/core/InputBase';
+import Paper from '@material-ui/core/Paper';
 
 
 const styles = theme => ({
@@ -21,6 +22,16 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         fullWidth: true,
+        width: 500,
+    },
+    details: {
+        marginTop: 20,
+        padding: 20,
+        border: 50,
+        backgroundColor: '#edf7f6',
+        grid: {
+            width: 800,
+        },
     },
     dense: {
         marginTop: 16,
@@ -33,10 +44,7 @@ const styles = theme => ({
     },
     root: {
         flexGrow: 1,
-    },
-
-    grid: {
-        width: 800,
+        marginLeft: 50,
     },
     grow: {
         flexGrow: 1,
@@ -81,15 +89,23 @@ class Notes extends Component {
         const classes = this.props.classes;
         return(
             <>
-            <h3>NOTES</h3>    
-            <TextField
-                id="standard-textarea"
-                defaultValue={this.props.detail.notes}
-                multiline
-                className={classes.textField}
-                margin="normal"
-                onChange = {event => this.handleChange(event)}
-            />      
+            <div className={classes.root}>            
+            <Grid xs={12} container direction="row" alignItems="top" className={classes.grid}>
+                <Paper elevation={1} className={classes.details} >
+                    <Typography variant="h6" component="h5">
+                        Notes
+                    </Typography>  
+                    <TextField
+                        id="standard-textarea"
+                        defaultValue={this.props.detail.notes}
+                        multiline
+                        className={classes.textField}
+                        margin="normal"
+                        onChange = {event => this.handleChange(event)}
+                    />     
+                </Paper> 
+            </Grid>
+            </div>
             </>
         );
     }

@@ -91,11 +91,8 @@ class NewProjectButton extends Component{
                     onClose={this.handleClose}
                     aria-labelledby="form-dialog-title"
                 >
-                    <DialogTitle id="form-dialog-title">Create a New Project!</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Name Your Project</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>
-                            Give a name to your project!
-                        </DialogContentText>
                         <TextField
                             autoFocus
                             margin="dense"

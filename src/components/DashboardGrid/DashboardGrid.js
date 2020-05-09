@@ -13,7 +13,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
+import './DashboardGrid.css';
 
 
 
@@ -49,6 +51,11 @@ const styles = theme => ({
         color: theme.palette.common.white,
         padding: 5,
     },
+    text: {
+        fontWeight: '500',
+        fontSize: 14,
+        padding: 20,
+    }
 });
 
 class DashboardGrid extends Component {
@@ -78,9 +85,9 @@ class DashboardGrid extends Component {
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
-                            <TableRow>
+                            <TableRow className={classes.row}>
                                 <CustomTableCell>Project</CustomTableCell>
-                                <CustomTableCell align="right">Date</CustomTableCell>
+                                <CustomTableCell align="center">Date</CustomTableCell>
                                 <CustomTableCell align="right">View</CustomTableCell>
                             </TableRow>
                         </TableHead>
@@ -89,10 +96,10 @@ class DashboardGrid extends Component {
                                 return (
                                     <>
                                     <TableRow className={classes.row} key={project.id}>
-                                        <CustomTableCell component="th" scope="row">
-                                            {project.project_name}
+                                        <CustomTableCell component="th" scope="row" className={classes.text}>
+                                                {project.project_name}
                                         </CustomTableCell>
-                                        <CustomTableCell align="right">{project.date}</CustomTableCell>
+                                        <CustomTableCell align="center" className={classes.text}>{project.date}</CustomTableCell>
                                         <CustomTableCell align="right" onClick ={() => this.handleClick(project.project_name, project.id)}>
                                         <Button className={classes.button}>View</Button></CustomTableCell>
                                     </TableRow>

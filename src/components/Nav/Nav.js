@@ -18,6 +18,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 
 const styles = theme => ({
+  about: {
+    fontSize: 16,
+    fontWeight: 500,
+  },
   root: {
     flexGrow: 1,
   },
@@ -36,7 +40,7 @@ const styles = theme => ({
   },
   link: {
     color: theme.palette.common.white,
-    // backgroundColor: theme.palette.secondary.main,
+    fontSize: 14,
   }
 }); 
 
@@ -75,7 +79,7 @@ function Nav(props){
             </>
           )}
           {/* Always show this link since the about page is not protected */}
-          <Link className="link" to="/about"><Typography variant="h6" color="inherit">ABOUT</Typography>
+          <Link className="link" to="/about"><Typography className={classes.about} color="inherit">ABOUT</Typography>
           </Link>
 
           {/* <Button color="inherit">Login</Button> */}

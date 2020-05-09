@@ -2,24 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 
-
-import TabMenu from '../TabMenu/TabMenu';
+import ParamsCard from '../ParamsCard/ParamsCard';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-
-
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-
-
-
 
 
 const styles = theme => ({
@@ -42,15 +31,16 @@ const styles = theme => ({
     },
     root: {
         flexGrow: 1,
+        marginLeft: 50,
     },
     grow: {
         flexGrow: 1,
     },
-    header: {
-        marginLeft: 300,
-    },
     h2: {
         fontSize: 3
+    },
+    grid: {
+        margin: 20,
     },
     menuButton: {
         marginLeft: -12,
@@ -84,6 +74,9 @@ const styles = theme => ({
     },
     float: {
         marginRight: 200,
+        fontWeight: '500',
+        fontSize: 14,
+        padding: 20,
     },
 });
 
@@ -187,21 +180,22 @@ class Calculator extends Component {
         console.log('here is new state:', this.state);
 
         return (
-            <>
-                <Grid container direction="row" alignItems="center" spacing={7}>
+            <>  
+            <div className={classes.root}>
+                <Grid container direction="row" alignItems="center" spacing={3}>
 
-                    <Grid item xs={12} sm={6} className="header">
+                    <Grid item className={classes.header}>
                         <h3>Warp Calculator</h3>  
                     </Grid>
-                    <Grid item xs={12} sm={6} className="header">
+                    {/* <Grid item xs={12} sm={6} className={classes.flo}>
                         <h3 >Weft Calculator</h3>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <Grid container direction="row" alignItems="center">
-                    <Grid item xs={6} sm={3}>
+                    <Grid item>
                         <TextField
                             id="outlined-with-placeholder"
-                            label="finished length of piece"
+                            label="finished length"
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
@@ -211,11 +205,12 @@ class Calculator extends Component {
                         />
                     </Grid>
                     
-                    <Grid item xs={6} sm={3}>
+                    <Grid item>
                         <Typography className="float" xs={6} sm={3}>inches (include hems)</Typography>
                     </Grid>
+                </Grid>
 
-                    <Grid item xs={6} sm={3}>
+                    {/* <Grid item xs={6} sm={3}>
                         <TextField
                             id="outlined-with-placeholder"
                             label="ppi"
@@ -226,13 +221,13 @@ class Calculator extends Component {
                             type="Number"
                             onChange={event => this.handleChange(event, 'ppi')}
                         />
-                    </Grid>
-                    <Grid item xs={6} sm={3}>
+                    </Grid> */}
+                    {/* <Grid item xs={6} sm={3}>
                         <Typography className="float">picks per inch</Typography>
-                    </Grid>
-                </Grid>
+                    </Grid> */}
+                
                 <Grid container direction="row" alignItems="center">
-                    <Grid item xs={6} sm={3}>
+                    <Grid item>
                         <TextField
                             id="outlined-with-placeholder"
                             label="quantity"
@@ -244,10 +239,10 @@ class Calculator extends Component {
                             onChange={event => this.handleChange(event, 'quantity')}
                         />
                     </Grid>
-                    <Grid item xs={6} sm={3}>
+                    <Grid item>
                         <Typography className="float">number of items</Typography>
                     </Grid>
-                    <Grid item xs={6} sm={3}>
+                    {/* <Grid item xs={6} sm={3}>
                         <TextField
                             id="outlined-with-placeholder"
                             label="takeup"
@@ -261,10 +256,10 @@ class Calculator extends Component {
                     </Grid>
                     <Grid item xs={6} sm={3}>
                         <Typography className="float">%</Typography>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <Grid container direction="row" alignItems="center">
-                    <Grid item xs={6} sm={3}>
+                    <Grid item>
                         <TextField
                             id="outlined-with-placeholder"
                             label="fringe length"
@@ -276,10 +271,10 @@ class Calculator extends Component {
                             onChange={event => this.handleChange(event, 'fringe_length_in')}
                         />
                     </Grid>
-                    <Grid item xs={6} sm={3}>
+                    <Grid item>
                         <Typography className="float" size="small">inches</Typography>
                     </Grid>
-                    <Grid item xs={6} sm={3}>
+                    {/* <Grid item xs={6} sm={3}>
                         <TextField
                             id="outlined-with-placeholder"
                             label="yards per lb."
@@ -293,10 +288,10 @@ class Calculator extends Component {
                     </Grid>
                     <Grid item>
                         <Typography className="float" xs={6} sm={3}>ypp (yards per lb.)</Typography>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <Grid container direction="row" alignItems="center">
-                    <Grid item xs={6} sm={3}>
+                    <Grid item >
                         <TextField
                             id="outlined-with-placeholder"
                             label="sampling length"
@@ -307,15 +302,15 @@ class Calculator extends Component {
                             onChange={event => this.handleChange(event, 'sampling_length_in')}
                         />
                     </Grid>
-                    <Grid item xs={6} sm={3}>
+                    <Grid item>
                         <Typography className="float" size="small">inches</Typography>
                     </Grid>
-                    <Grid item xs={6} sm={3}>
+                    {/* <Grid item xs={6} sm={3}>
                         <Button
                             className={classes.floatButton}
                             onClick={() => this.handleClickWeft()}
                         >Calculate Weft</Button>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <Grid container direction="row" alignItems="center">
                     <Grid item>
@@ -466,13 +461,10 @@ class Calculator extends Component {
                 </Grid>  
                 <Grid container direction="row" alignItems="center">
                     <Grid item>
-                        <h3>Warp Calculations</h3>
-                        <ul>
-                            <li>Total warp (yards): {this.props.detail.warp_total_yds} yards</li>
-                            <li>Total warp (ounces): {this.props.detail.warp_total_oz} yards</li>
-                        </ul>
+                        <ParamsCard />
                     </Grid>
-                </Grid>  
+                </Grid>
+            </div>
             </>
         );
     }

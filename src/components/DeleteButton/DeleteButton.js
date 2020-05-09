@@ -16,6 +16,9 @@ import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        marginLeft: 50,
+        marginTop: 20,
+        float: 'right',
     },
     grow: {
         flexGrow: 1,
@@ -63,9 +66,11 @@ class DeleteButton extends Component {
         const classes = this.props.classes;
         return (
             <>
+            <div className={classes.root}>
                 <Grid align-items-xs-right justify-xs-flex-end>
                     <Button type="submit" onClick={this.handleSubmit} className={classes.button}>Delete Project</Button>
                 </Grid>
+            </div>
             </>
         );
     }

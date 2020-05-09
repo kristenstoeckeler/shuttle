@@ -16,6 +16,7 @@ import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        marginLeft: 50,
     },
     grow: {
         flexGrow: 1,
@@ -40,36 +41,42 @@ const styles = theme => ({
         fontSize: 35,
         margin: 4,
         paddingLeft: 10,
-    }
+    },
+    select: {
+        backgroundColor: 'black',
+    },
+    deselect: {
+        backgroundColor: 'white',
+    },
 });
 
 
 class Draft extends Component {
 
     state = {
-        color: '',
+        click: false,
     }
 
     handleClick = (id) => {
         console.log( 'in handleClick for Table Draft', id);
 
         this.setState({
-            [id]: 1
+            [id]: 1,
+            click: !this.state.click,
         });
-
-        return 'black'
+        
+        this.handleColor(id);
     }
 
-    //     this.handleColor(id); 
-    // }
-
-    // handleColor = (id) => {
-    //     console.log( 'in handleColor', id);
+    handleColor = (id) => {
+        console.log( 'in handleColor', id);
         
-    //     if( this.state.id === 1){
-    //         return 'black'
-    //     }
-    // }
+        if (this.state.click) {
+            return 'black'
+        } else {
+            return 'white'
+        }
+    }
 
     render() {
         console.log( 'here is state for DRAFTFILE', this.state);
@@ -77,10 +84,10 @@ class Draft extends Component {
         const classes = this.props.classes;
         return (
             <>
-            <div>
+            <div className={classes.root}>
+                {/* <div>{this.handleColor()}</div> */}
                 <table>
                     <tr>
-                        <td id="a1" onClick={this.handleClick}></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -112,12 +119,13 @@ class Draft extends Component {
                         <td></td>
                         <td></td>
                         <td></td>
-                            <td class="tieup" data-id="6a" style={{ background: this.handleClick}} onClick={() => this.handleClick("6a")}></td>
-                            <td class="tieup" id="5a"></td>
+                        <td></td>
+                            <td class="tieup" id="6a" style={{ background: this.handleColor()}} onClick={() => this.handleClick("6a")}></td>
+                            <td class="tieup" id="5a" style={{ background: this.handleColor() }} onClick={() => this.handleClick("5a")}></td>
                             <td class="tieup" id="4a"></td>
                             <td class="tieup" id="3a"></td>
                             <td class="tieup" id="2a"></td>
-                            <td class="tieup" style={{ background: this.handleClick }} id="1a"></td>
+                            <td class="tieup" id="1a"></td>
                     </tr>
                     <tr>
                         <td></td>

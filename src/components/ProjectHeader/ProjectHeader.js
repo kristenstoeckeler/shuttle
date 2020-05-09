@@ -9,14 +9,18 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+
 
 
 
 const styles = theme => ({
     textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        fullWidth: true,
+        marginTop: 20,
+        marginLeft: 60,
+        width: 'auto',
+        fontWeight: 500,
+
     },
     root: {
         flexGrow: 1,
@@ -32,7 +36,9 @@ const styles = theme => ({
         margin: 5,
         backgroundColor: theme.palette.secondary.dark,
         color: theme.palette.common.white,
-        align: 'right',
+        float: 'right',
+        marginTop: 20,
+        marginRight: 60,
     },
     input: {
         backgroundColor: theme.palette.common.white,
@@ -140,33 +146,26 @@ class ProjectHeader extends Component {
                 projectDetails: this.props.detail,
                 projectNotes: this.props.notes,
             }
-        
         })
+    }
+
+    handleClick = () => {
+        console.log( 'in handleClick');
     }
 
 
     render() {
-        console.log( 'rendering project header');
-        
         const classes = this.props.classes;
         return (
             <>
-            <header>
-                {JSON.stringify(this.props.detail)}
-                {JSON.stringify(this.props.notes)}
-                
+            <header>                
                 <Grid align-items-xs-right justify-xs-flex-end>
                     <Button type="submit" onClick={this.handleSubmit} className={classes.button}>Save Project</Button>
                 </Grid>
-                <form onSubmit={this.handleSubmit}>
-                    <TextField
-                        id="standard-textarea"
-                        className={classes.textField}
-                        placeholder={this.props.detail.project_name}
-                        defaultValue={this.props.detail.project_name}
-                        onChange={event => this.handleChange(event)}
-                    ></TextField>
-                </form>
+                    <Typography onClick={this.handleClick} variant="h5" component="h5" className={classes.textField}>
+                    {this.props.detail.project_name}
+                </Typography>
+
             </header>
             </>
         );

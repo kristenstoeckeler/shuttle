@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import './LoginPage.css';
 import 'typeface-roboto';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 
 
 const styles = theme => ({
@@ -89,7 +87,7 @@ class LoginPage extends Component {
             <Input
               placeholder="password" 
               className={classes.input} 
-              type="text" 
+              type="password" 
               name="password" 
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}>

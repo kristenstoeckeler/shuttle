@@ -15,17 +15,19 @@ import lime from '@material-ui/core/colors/lime';
 import red from '@material-ui/core/colors/red';
 import teal from '@material-ui/core/colors/teal';
 import green from '@material-ui/core/colors/green';
+import pink from '@material-ui/core/colors/pink';
+
 
 
 import App from './components/App/App';
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: red[400] },
+    primary: { main: red['400'] },
     secondary: { 
       main: teal['A200'],
-      light: lime[500],
-      dark: green['A200'],
+      light: lime['500'],
+      dark: '#00c98d',
     },
     error: red,
     contrastThreshold: 3,

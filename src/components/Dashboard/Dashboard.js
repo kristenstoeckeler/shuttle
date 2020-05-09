@@ -3,19 +3,26 @@ import { connect } from 'react-redux';
 import UserPage from '../UserPage/UserPage';
 import DashboardGrid from '../DashboardGrid/DashboardGrid';
 import NewProjectButton from '../NewProjectButton/NewProjectButton';
+import { withStyles } from '@material-ui/core/styles';
+import Image from '../neutral.jpeg'; 
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+
+
+const styles = {
+  root: {
+    backgroundImage: `url(${Image})`,
+    backgroundRepeat: 'no-repeat',
+    padding: 50,
+    height: 1000,
+  }
+};
 
 class Dashboard extends Component {
   render(){
+    const classes = this.props.classes;
+
     return (
-      <div>
-        <h1>
-          Dashboard
-        </h1>
+      <div className={classes.root}>
         <UserPage />
         <div>
           <NewProjectButton />
@@ -29,4 +36,6 @@ class Dashboard extends Component {
 // export default withStyles(styles)
 // withRouter(connect(putReduxStateOnProps)(NewProjectButton));
 
-export default connect()(Dashboard);
+
+export default withStyles(styles)(connect()(Dashboard));
+
