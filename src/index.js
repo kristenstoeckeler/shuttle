@@ -14,12 +14,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import lime from '@material-ui/core/colors/lime';
 import red from '@material-ui/core/colors/red';
 import teal from '@material-ui/core/colors/teal';
-import green from '@material-ui/core/colors/green';
-import pink from '@material-ui/core/colors/pink';
-
-
 
 import App from './components/App/App';
+
 
 const theme = createMuiTheme({
   palette: {

@@ -14,6 +14,7 @@ import ParamsCard from '../ParamsCard/ParamsCard';
 import Grid from '@material-ui/core/Grid';
 import ProjectFooter from '../ProjectFooter/ProjectFooter';
 import MaterialsTable from '../MaterialsTable/MaterialsTable';
+import ImageUpload from '../ImageUpload/ImageUpload';
 
 
 function TabPanel(props) {
@@ -71,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
     const classes = useStyles();
     //this sets which tab automatically loads
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(4);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -108,20 +109,22 @@ export default function VerticalTabs() {
             </TabPanel>
             <TabPanel value={value} index={4}>
                 Photos View
+                <ImageUpload/>
             </TabPanel>
             <TabPanel value={value} index={5}>
                 <Grid className={classes.grid}>
                     <Grid item>
                         <DraftFile />
                     </Grid>
-                    <Grid item>
-                        <ParamsCard />
+                </Grid>
+                <div>
+                    <ParamsCard />
+                    <MaterialsTable />
+                    <Notes />
+                    <Grid>
+                        <ProjectFooter />
                     </Grid>
-                </Grid>
-                <Notes />
-                <Grid>
-                    <ProjectFooter />
-                </Grid>
+                </div>
       </TabPanel>
         </div>
     );

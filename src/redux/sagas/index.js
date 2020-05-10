@@ -7,6 +7,8 @@ import createSaga from './createSaga';
 import getDetailSaga from './getDetailSaga';
 import updateSaga from './updateSaga';
 import deleteSaga from './deleteSaga';
+import saveImageSaga from './saveImageSaga';
+import fetchImageSaga from './fetchImageSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +27,7 @@ export default function* rootSaga() {
     getDetailSaga(),
     updateSaga(),
     deleteSaga(),
+    saveImageSaga(),
+    fetchImageSaga(),
   ]);
 }

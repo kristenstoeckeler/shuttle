@@ -14,21 +14,32 @@ import Paper from '@material-ui/core/Paper';
 
 
 const styles = theme => ({
+   root: {
+        marginLeft: 10,
+   },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
+
+
     },
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
+        backgroundColor: theme.palette.common.white,
+        padding: 20,
         fullWidth: true,
         width: 500,
+        borderRadius: 20,
+    },
+    grid: {
+        marginLeft: 10,
     },
     details: {
         marginTop: 20,
         padding: 20,
         border: 50,
-        backgroundColor: '#edf7f6',
+        backgroundColor: '#ffeceb',
         grid: {
             width: 800,
         },
@@ -90,7 +101,7 @@ class Notes extends Component {
         return(
             <>
             <div className={classes.root}>            
-            <Grid xs={12} container direction="row" alignItems="top" className={classes.grid}>
+            <Grid xs={12} container direction="row" alignItems="top">
                 <Paper elevation={1} className={classes.details} >
                     <Typography variant="h6" component="h5">
                         Notes

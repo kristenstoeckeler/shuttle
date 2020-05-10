@@ -14,6 +14,7 @@ const AboutPage = () => (
       <h3>Node.js</h3>
       <h3>Express</h3>
       <h3>PostgreSQL</h3>
+      <h3>Firebase</h3>
       <h3>Material UI</h3>
     </div>
   </div>
