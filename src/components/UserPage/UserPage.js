@@ -1,24 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 
-// this could also be written with destructuring parameters as:
-// const UserPage = ({ user }) => (
-// and then instead of `props.user.username` you could use `user.username`
-const UserPage = (props) => (
-  <div>
-    <h2 id="welcome">
-      Welcome, { props.user.username }!
-    </h2>
-  </div>
-);
 
-// Instead of taking everything from state, we just want the user info.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({user}) => ({ user });
-const mapStateToProps = state => ({
-  user: state.user,
-});
+const styles = theme => ({
+  root: {
+    paddingLeft: 30,
+    paddingRight: 30,
+    backgroundColor: theme.palette.common.white,
+    margin: 20,
+    paddingTop: 20,
+    borderRadius: 20,
+    width: 'auto',
+  },
+})
 
-// this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserPage);
+class UserPage extends Component {
+
+  render(){
+    const classes = this.props.classes;
+    return(
+        <>
+        <div className={classes.root}>
+          <h2 id="welcome">
+            Welcome, {this.props.user.username}!
+          </h2>
+        </div>
+        </>
+    );
+  }
+}
+
+UserPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+const putReduxStateOnProps = reduxStore => ({
+  user: reduxStore.user,
+})
+
+export default withStyles(styles)(connect(putReduxStateOnProps)(UserPage));
+

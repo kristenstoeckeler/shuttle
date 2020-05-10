@@ -13,6 +13,7 @@ import DeleteButton from '../DeleteButton/DeleteButton';
 import ParamsCard from '../ParamsCard/ParamsCard';
 import Grid from '@material-ui/core/Grid';
 import ProjectFooter from '../ProjectFooter/ProjectFooter';
+import MaterialsTable from '../MaterialsTable/MaterialsTable';
 
 
 function TabPanel(props) {
@@ -100,7 +101,7 @@ export default function VerticalTabs() {
                 <DraftFile />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                    Materials View
+                    <MaterialsTable />
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <Notes />

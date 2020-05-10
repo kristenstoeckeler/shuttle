@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UserPage from '../UserPage/UserPage';
 import DashboardGrid from '../DashboardGrid/DashboardGrid';
 import NewProjectButton from '../NewProjectButton/NewProjectButton';
 import { withStyles } from '@material-ui/core/styles';
@@ -23,7 +22,6 @@ class Dashboard extends Component {
 
     return (
       <div className={classes.root}>
-        <UserPage />
         <div>
           <NewProjectButton />
           <DashboardGrid />

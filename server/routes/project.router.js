@@ -11,7 +11,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log( 'made it to server project router', req.user);
-    const queryText = 'SELECT * FROM "project" WHERE "user_id" = $1;'
+    const queryText = 'SELECT * FROM "project" WHERE "user_id" = $1 ORDER BY "project_name";'
 
     if(req.isAuthenticated()){
         pool.query(queryText, [req.user.id])

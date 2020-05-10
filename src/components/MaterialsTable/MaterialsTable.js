@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 
 
 //Material UI Imports
-import { withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,10 +13,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-
-import './DashboardGrid.css';
-
-
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -55,7 +51,7 @@ const styles = theme => ({
         fontSize: 18,
         padding: 40,
     },
-    date:{
+    date: {
         fontSize: 16,
         fontWeight: '500',
     },
@@ -67,29 +63,25 @@ const styles = theme => ({
     }
 });
 
-class DashboardGrid extends Component {
+class MaterialsTable extends Component {
 
-    state = {
-        userId: this.props.user.id,
-        projectId: '',
-    }
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_PROJECTS', payload: this.state.userId });
+        this.props.dispatch({ type: 'FETCH_PROJECTS', payload: this.props.user });
     }
 
     handleClick = (projectName, projectId) => {
-        console.log( 'in handleClick', projectName, projectId );
-        this.props.dispatch({ type: 'WORKING_REDUCER', payload: projectId})
+        console.log('in handleClick', projectName, projectId);
+        this.props.dispatch({ type: 'WORKING_REDUCER', payload: projectId })
 
         this.props.history.push(`/draft/${projectId}`)
-        
+
     }
 
-    render(){
+    render() {
         const classes = this.props.classes;
 
-        return(
+        return (
             <>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
@@ -101,20 +93,17 @@ class DashboardGrid extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.project.map((project) => {
-                                return (
-                                    <>
-                                    <TableRow className={classes.row} key={project.id}>
+                            
+                                        <TableRow className={classes.row} key={this.props.detail.id}>
                                             <CustomTableCell align="center" component="th" scope="row" className={classes.text}>
-                                                {project.project_name}
-                                        </CustomTableCell>
-                                        <CustomTableCell align="center" className={classes.date}>{project.date}</CustomTableCell>
-                                        <CustomTableCell align="center" onClick ={() => this.handleClick(project.project_name, project.id)}>
-                                        <Button className={classes.button}>View</Button></CustomTableCell>
-                                    </TableRow>
-                                    </>
-                                );
-                            })}
+                                                {this.props.detail.project_name}
+                                            </CustomTableCell>
+                                            <CustomTableCell align="center" className={classes.date}>{this.props.detail.date}</CustomTableCell>
+                                            <CustomTableCell align="center" >
+                                                <Button className={classes.button}>View</Button></CustomTableCell>
+                                        </TableRow>
+            
+                
                         </TableBody>
                     </Table>
                 </Paper>
@@ -127,14 +116,14 @@ class DashboardGrid extends Component {
 
 
 
-DashboardGrid.propTypes = {
+MaterialsTable.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
 const putReduxStateOnProps = (reduxStore) => ({
-    project: reduxStore.project,
+    detail: reduxStore.detail,
     user: reduxStore.user,
 });
 
-export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(DashboardGrid)));
+export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(MaterialsTable)));
 
