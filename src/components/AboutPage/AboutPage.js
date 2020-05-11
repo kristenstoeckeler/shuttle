@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+
+//imports for Material UI styling
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Image from '../shuttle.jpeg';
 import Card from '@material-ui/core/card'; 
 import Typography from '@material-ui/core/Typography';
 
+//import for background image
+import Image from '../shuttle.jpeg';
 
-
-
+//declaring style properties
 const styles = theme => ({
     root: {
       backgroundImage: `url(${Image})`,
@@ -33,7 +34,6 @@ const styles = theme => ({
 class AboutPage extends Component {
   render(){
     const classes = this.props.classes;
-
     return(
       <>
         <div className={classes.root}>
@@ -59,4 +59,4 @@ AboutPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(connect()(AboutPage));
+export default withStyles(styles)(AboutPage);

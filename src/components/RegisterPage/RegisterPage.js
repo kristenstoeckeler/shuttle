@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import CreateAccountCard from '../CreateAccountCard/CreateAccountCard';
-import Image from '../shuttle.jpeg'; 
+
+//imports for Material UI styling
 import { withStyles } from '@material-ui/core/styles';
 
+//background image import
+import Image from '../shuttle.jpeg'; 
 
+//importing CreateAccountCard component
+import CreateAccountCard from '../CreateAccountCard/CreateAccountCard';
+
+//declaring style properties
 const styles = {
   root: {
     backgroundImage: `url(${Image})`,
@@ -14,33 +19,8 @@ const styles = {
   }
 };
 
+
 class RegisterPage extends Component {
-  state = {
-    username: '',
-    password: '',
-  };
-
-  registerUser = (event) => {
-    event.preventDefault();
-
-    if (this.state.username && this.state.password) {
-      this.props.dispatch({
-        type: 'REGISTER',
-        payload: {
-          username: this.state.username,
-          password: this.state.password,
-        },
-      });
-    } else {
-      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
-    }
-  } // end registerUser
-
-  handleInputChangeFor = propertyName => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
-  }
 
   render() {
     const classes = this.props.classes;
@@ -50,17 +30,11 @@ class RegisterPage extends Component {
         <center className={classes.root}>
             <CreateAccountCard />
         </center>
-
       </div>
       </>
     );
   }
 }
 
-
-const mapStateToProps = state => ({
-  errors: state.errors,
-});
-
-export default withStyles(styles)(connect(mapStateToProps)(RegisterPage));
+export default withStyles(styles)(RegisterPage);
 

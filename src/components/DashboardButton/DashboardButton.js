@@ -1,12 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
+
+//withRouter allows child component to access props for props.history
 import { withRouter } from 'react-router';
 
-
-import Button from '@material-ui/core/Button';
-import { withStyles, withTheme } from '@material-ui/core/styles';
+//imports for Material UI styling
+import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
+import Button from '@material-ui/core/Button';
+
+//declaring style properties
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
@@ -17,9 +20,6 @@ const styles = theme => ({
     },
 });
 
-// This button shows up in multiple locations and is styled differently
-// because it's styled differently depending on where it is used, the className
-// is passed to it from it's parents through React props
 
 function DashboardButton(props) {
     const { classes } = props;
@@ -32,8 +32,9 @@ function DashboardButton(props) {
     );
 }
 
-// This component doesn't need 'mapStateToProps'
-// because it doesn't care what the current state is.
-// No matter what the redux state is, this button will always be a log out button
-// this component still needs 'connect' though, because it is going to dispatch a redux action
-export default withStyles(styles)(withRouter(connect()(DashboardButton)));
+DashboardButton.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+
+export default withStyles(styles)(withRouter(DashboardButton));

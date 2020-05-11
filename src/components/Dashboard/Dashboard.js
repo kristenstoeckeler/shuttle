@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+//imports for Material UI styling
+import { withStyles } from '@material-ui/core/styles';
+
+//importing child components
 import DashboardGrid from '../DashboardGrid/DashboardGrid';
 import NewProjectButton from '../NewProjectButton/NewProjectButton';
-import { withStyles } from '@material-ui/core/styles';
+
+//importing image for background
 import Image from '../neutral.jpeg'; 
 
 
-
+//declaring style properties
 const styles = {
   root: {
     backgroundImage: `url(${Image})`,
@@ -18,6 +24,8 @@ const styles = {
 
 class Dashboard extends Component {
 
+  //resetting state and sending it to reset DETAIL reducer so that navigating 
+  //between projects through dashboard doesn't render wrong information
   state = {
     project_name: '',
     finished_length_in: 0,
@@ -47,12 +55,13 @@ class Dashboard extends Component {
     notes: 0,
   }
 
+  //resetting DETAIL reducer
   componentDidMount() {
     this.props.dispatch({
       type: 'DETAIL_REDUCER',
       payload: this.state
     })
-  }
+  }//end of componentDidMount
 
   render(){
     const classes = this.props.classes;
@@ -68,9 +77,6 @@ class Dashboard extends Component {
     ); 
   }
 }
-// export default withStyles(styles)
-// withRouter(connect(putReduxStateOnProps)(NewProjectButton));
-
 
 export default withStyles(styles)(connect()(Dashboard));
 

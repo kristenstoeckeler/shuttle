@@ -6,41 +6,21 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 
-
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
+// import Footer from '../Footer/Footer';
 import AboutPage from '../AboutPage/AboutPage';
-// import UserPage from '../UserPage/UserPage';
 import Dashboard from '../Dashboard/Dashboard';
-// import NewProject from '../NewProject/NewProject';
+import Nav from '../Nav/Nav';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import WorkingProject from '../WorkingProject/WorkingProject';
 
+//styles imports
 import './App.css';
 import 'typeface-roboto';
 
-const styles = {
-  root: {
-    backgroundColor: 'black',
-    backgroundImage: `url(${Image})`,
-    backgroundRepeat: 'no-repeat',
-  }
-};
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
-  }
-
   render() {
-    const classes = this.props.classes;
-
     return (
       <Router>
         <div>
@@ -48,29 +28,26 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-            {/* Visiting localhost:3000/about will show the about page.
-            This is a route anyone can see, no login necessary */}
-            <Route
-              exact
-              path="/about"
-              component={AboutPage}
-            />
-            {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/home will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
-            Even though it seems like they are different pages, the user is always on localhost:3000/home */}
+            {/* Visiting localhost:3000/home will show the 'Dashboard' if the user is logged in.
+            If the user is not logged in, the ProtectedRoute will show the 'Register' page with 'Login' Navbar.*/}
             <ProtectedRoute
               exact
               path="/home"
               component={Dashboard}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the Dashboard page instead. */}
+            they will see the 'Working Project' page instead. */}
             <ProtectedRoute
               exact
               path="/draft/:id"
-              class="root"
               component={WorkingProject}
+            />
+            {/* Visiting localhost:3000/about will show the about page.
+            This is a route anyone can see, no login necessary */}
+            <Route
+              exact
+              path="/about"
+              component={AboutPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
@@ -82,8 +59,4 @@ class App extends Component {
   )}
 }
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(connect()(App));
+export default App;
