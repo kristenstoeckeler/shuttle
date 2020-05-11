@@ -9,6 +9,7 @@ import updateSaga from './updateSaga';
 import deleteSaga from './deleteSaga';
 import saveImageSaga from './saveImageSaga';
 import fetchImageSaga from './fetchImageSaga';
+import fetchMaterialSaga from './fetchMaterialSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -29,5 +30,6 @@ export default function* rootSaga() {
     deleteSaga(),
     saveImageSaga(),
     fetchImageSaga(),
+    fetchMaterialSaga(),
   ]);
 }

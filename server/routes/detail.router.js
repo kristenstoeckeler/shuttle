@@ -27,8 +27,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     }
 });
 
-router.put('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('made it to server detail router for PUT', req.body, req.params.id);
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('made it to server detail router for PUT', req.body, req.body.projectId.id);
     const queryText = 
         `UPDATE "project" SET ("finished_length_in", "quantity", 
         "fringe_length_in", "sampling_length_in", "loom_waste_in", 
@@ -55,7 +55,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             req.body.projectDetails.warp_total_oz, req.body.projectDetails.ppi, 
             req.body.projectDetails.weft_takeup_percent, req.body.projectDetails.weft_ypp, 
             req.body.projectDetails.weft_total_yds,
-            req.body.projectDetails.weft_total_oz, req.body.projectNotes, req.params.id])
+            req.body.projectDetails.weft_total_oz, req.body.projectNotes, req.body.projectId.id])
             .then((result) => {
                 res.sendStatus(200);
             }).catch((error) => {

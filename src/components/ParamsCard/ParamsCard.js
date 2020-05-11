@@ -74,14 +74,11 @@ class ParamsCard extends Component {
                                 <Typography component="p">
                                     Warp ypp: <b>{this.props.detail.warp_yards_per_lb} yds. per lb.</b>
                                 </Typography>
-                                <Typography component="p">
+                                {/* <Typography component="p">
                                     Picks per inch: <b>{this.props.detail.ppi} ppi</b>
-                                </Typography>
+                                </Typography> */}
                                 <Typography component="p">
                                     Takeup: <b>{this.props.detail.weft_takeup_percent}%</b>
-                                </Typography>
-                                <Typography component="p">
-                                    Weft ypp: <b>{this.props.detail.weft_ypp} ypp</b>
                                 </Typography>
                                 </div>
                             </Paper>
@@ -107,7 +104,7 @@ class ParamsCard extends Component {
                                         </Typography>
                                 </div>
                             </Paper>
-                    <Paper elevation={1} className={classes.details} >
+                    {/* <Paper elevation={1} className={classes.details} >
                         <div border={1}>
                             <Typography variant="h6" component="h5">
                                 Weft Calculations
@@ -119,7 +116,7 @@ class ParamsCard extends Component {
                                 Total ounces: <b>{this.props.detail.weft_total_oz} yds.</b>
                             </Typography>
                         </div>
-                    </Paper>
+                    </Paper> */}
                 </div>
             </>
         );

@@ -89,7 +89,7 @@ class MaterialsTable extends Component {
 
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_PROJECTS', payload: this.props.user });
+        this.props.dispatch({ type: 'FETCH_MATERIALS', payload: this.props.detail.id });
     }
 
     // handleClick = (projectName, projectId) => {
@@ -112,8 +112,10 @@ class MaterialsTable extends Component {
                         <TableHead>
                             <TableRow className={classes.row}>
                                 <CustomTableCell align="center" className={classes.project}>YARN</CustomTableCell>
-                                <CustomTableCell align="center">AMOUNT</CustomTableCell>
-                                <CustomTableCell align="center" className={classes.view}>VIEW</CustomTableCell>
+                                <CustomTableCell align="center">COLOR</CustomTableCell>
+                                <CustomTableCell align="center">SOURCE</CustomTableCell>
+                                <CustomTableCell align="center">QUANTITY</CustomTableCell>
+                                <CustomTableCell align="center" className={classes.view}>IN STASH?</CustomTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

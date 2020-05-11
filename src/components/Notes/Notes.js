@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router';
+
 
 
 import { withStyles } from '@material-ui/core/styles';
@@ -86,7 +88,9 @@ const styles = theme => ({
 
 class Notes extends Component {
 
-    
+    componentDidMount() {
+        this.props.dispatch({ type: 'DETAILS', payload: this.props.match.params });
+    }
 
     handleChange = (event) => {
         console.log( 'in handleChange', event.target.value);
@@ -133,4 +137,4 @@ const putReduxStateOnProps = reduxStore => ({
     notes: reduxStore.notes,
 })
 
-export default withStyles(styles)(connect(putReduxStateOnProps)(Notes));
+export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(Notes)));

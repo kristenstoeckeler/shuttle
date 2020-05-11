@@ -9,12 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Calculator from '../Calculator/Calculator';
 import Notes from '../Notes/Notes';
-import DeleteButton from '../DeleteButton/DeleteButton';
 import ParamsCard from '../ParamsCard/ParamsCard';
-import Grid from '@material-ui/core/Grid';
-import ProjectFooter from '../ProjectFooter/ProjectFooter';
-import MaterialsTable from '../MaterialsTable/MaterialsTable';
-import ImageUpload from '../ImageUpload/ImageUpload';
+import Images from '../Images/Images';
+import PhotosTab from '../PhotosTab/PhotosTab';
+import '../Images/Images.css';
 
 
 function TabPanel(props) {
@@ -58,11 +56,14 @@ const useStyles = makeStyles((theme) => ({
         height: 'flex',
         marginLeft: 'auto',
         marginRight: 'auto',
+        marginBottom: 10,
         paddingTop: 30,
         paddingBottom: 50,
         paddingLeft: 150,
         paddingRight: 5,
         border: 5,
+        borderBottomRightRadius: 30,
+        borderBottomLeftRadius: 30,
         },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
@@ -72,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
     const classes = useStyles();
     //this sets which tab automatically loads
-    const [value, setValue] = React.useState(4);
+    const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -90,10 +91,10 @@ export default function VerticalTabs() {
             >
                 <Tab label="Calculator" {...a11yProps(0)} />
                 <Tab label="Draft" {...a11yProps(1)} />
-                <Tab label="Materials" {...a11yProps(2)} />
+                {/* <Tab label="Materials" {...a11yProps(2)} /> */}
                 <Tab label="Notes" {...a11yProps(2)} />
-                <Tab label="Photos" {...a11yProps(4)} />
-                <Tab label="All" {...a11yProps(3)} />
+                <Tab label="Photos" {...a11yProps(3)} />
+                <Tab label="All" {...a11yProps(4)} />
             </Tabs>
             <TabPanel value={value} index={0}>
                 <Calculator />
@@ -101,29 +102,22 @@ export default function VerticalTabs() {
             <TabPanel value={value} index={1}>
                 <DraftFile />
             </TabPanel>
-            <TabPanel value={value} index={2}>
+            {/* <TabPanel value={value} index={2}>
                     <MaterialsTable />
-            </TabPanel>
-            <TabPanel value={value} index={3}>
+            </TabPanel> */}
+            <TabPanel value={value} index={2}>
                 <Notes />
             </TabPanel>
-            <TabPanel value={value} index={4}>
-                Photos View
-                <ImageUpload/>
+            <TabPanel value={value} index={3}>
+                <PhotosTab/>
+                {/* <Images /> */}
             </TabPanel>
-            <TabPanel value={value} index={5}>
-                <Grid className={classes.grid}>
-                    <Grid item>
-                        <DraftFile />
-                    </Grid>
-                </Grid>
+            <TabPanel value={value} index={4}>
+                <Images />
                 <div>
+                    {/* <MaterialsTable /> */}
                     <ParamsCard />
-                    <MaterialsTable />
                     <Notes />
-                    <Grid>
-                        <ProjectFooter />
-                    </Grid>
                 </div>
       </TabPanel>
         </div>

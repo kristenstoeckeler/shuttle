@@ -7,6 +7,9 @@ import {
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -22,12 +25,22 @@ import WorkingProject from '../WorkingProject/WorkingProject';
 import './App.css';
 import 'typeface-roboto';
 
+const styles = {
+  root: {
+    backgroundColor: 'black',
+    backgroundImage: `url(${Image})`,
+    backgroundRepeat: 'no-repeat',
+  }
+};
+
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
   }
 
   render() {
+    const classes = this.props.classes;
+
     return (
       <Router>
         <div>
@@ -56,16 +69,21 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/draft/:id"
+              class="root"
               component={WorkingProject}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
 
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
   )}
 }
 
-export default connect()(App);
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(connect()(App));

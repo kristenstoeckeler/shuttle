@@ -11,7 +11,7 @@ import DeleteButton from '../DeleteButton/DeleteButton';
 
 const styles = theme => ({
     delete: {
-        float: 'right',
+        // float: 'right',
     }
 });
 

@@ -3,7 +3,7 @@ import 'firebase/storage';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyA8Y1-Qbp0rHH7_Z5qIntvs7xYc2p0UYos",
+    apiKey: process.env.FIREBASE_KEY,
     authDomain: "shuttle-a3107.firebaseapp.com",
     databaseURL: "https://shuttle-a3107.firebaseio.com",
     projectId: "shuttle-a3107",

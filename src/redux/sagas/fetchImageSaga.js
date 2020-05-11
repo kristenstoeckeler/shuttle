@@ -2,9 +2,9 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchImage(action) {
-    console.log('in fetchImage saga', action.payload)
+    console.log('in fetchImage saga', action.payload.id)
     try {
-        const response = yield axios.get(`/api/image/${action.payload}`);
+        const response = yield axios.get(`/api/image/${action.payload.id}`);
         yield put({ type: 'IMAGES', payload: response.data })
     } catch (error) {
         console.log('GET request failed', error);

@@ -1,23 +1,62 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Image from '../shuttle.jpeg';
+import Card from '@material-ui/core/card'; 
+import Typography from '@material-ui/core/Typography';
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
 
-const AboutPage = () => (
-  <div>
-    <div>
-      <h2>Technologies</h2>
-      <h3>React</h3>
-      <h3>Redux</h3>
-      <h3>Node.js</h3>
-      <h3>Express</h3>
-      <h3>PostgreSQL</h3>
-      <h3>Firebase</h3>
-      <h3>Material UI</h3>
-    </div>
-  </div>
-);
 
-export default AboutPage;
+
+const styles = theme => ({
+    root: {
+      backgroundImage: `url(${Image})`,
+      backgroundRepeat: 'no-repeat',
+      padding: 50,
+      height: 1000,
+      backgroundColor: theme.palette.common.white
+    },
+    card: {
+      marginTop: 150,
+      marginLeft: 400,
+      padding: 30,
+      backgroundColor: theme.palette.common.white,
+      width: 200,
+    },
+  body: {
+    paddingLeft: 25,
+  },
+})
+
+
+class AboutPage extends Component {
+  render(){
+    const classes = this.props.classes;
+
+    return(
+      <>
+        <div className={classes.root}>
+          <Card className={classes.card}>
+              <Typography variant="h6">Technologies</Typography>
+            <div className={classes.body}>
+                <Typography >React</Typography>
+                <Typography>Redux</Typography>
+                <Typography>Node.js</Typography>
+                <Typography>Express</Typography>
+                <Typography>PostgreSQL</Typography>
+                <Typography>Firebase</Typography>
+                <Typography>Material UI</Typography>
+            </div>
+          </Card>
+        </div>
+      </>
+    );
+  }
+}
+
+AboutPage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(connect()(AboutPage));

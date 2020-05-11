@@ -2,6 +2,29 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {storage} from '../../Firebase';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router';
+import '../Images/Images.css';
+import './ImageUpload.css';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
+
+
+
+import Paper from '@material-ui/core/Paper';
+
+const styles = theme => ({
+    button: {
+        margin: 5,
+        backgroundColor: theme.palette.secondary.dark,
+        color: theme.palette.common.white,
+        padding: 5,
+        margin: 10,
+    },
+    input: {
+        marginTop: 30,
+    },
+});
 
 
 class ImageUpload extends Component {
@@ -11,14 +34,10 @@ class ImageUpload extends Component {
             image: null,
             url: '',
             progress: 0,
-            project_id: this.props.detail.id
+            project_id: this.props.match.params
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleUpload = this.handleUpload.bind(this);
-    }
-
-    componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_IMAGES', payload: this.state.project_id });
     }
 
     handleChange = (event) => {
@@ -56,9 +75,12 @@ class ImageUpload extends Component {
             type: 'SAVE_IMAGE',
             payload: this.state,
         });
+
+        this.props.dispatch({ type: 'FETCH_IMAGES', payload: this.props.match.params });
     }
 
     render() {
+        const classes = this.props.classes;
         console.log( 'here is IMAGE UPLOAD state', this. state);
         // const style = {
         //     height: '100vh',
@@ -69,26 +91,20 @@ class ImageUpload extends Component {
         // };
         return(
             <>
-            <div>
-            {/* <div style={style}> */}
-            <progress value={this.state.progress} max="100"/>
-            <br/>
-                <input type="file" onChange={this.handleChange}/>
-                <button onClick={this.handleUpload}>Upload</button>
-                <button onClick={this.saveImage}>Save Image</button>
-                <br/>
-                <img src={this.state.url} alt="Uploaded images"/>
-            </div>
-            <div>
-                <h5>Here are photos from DB</h5>
-                {this.props.images.map((image) => {
-                    return(
-                        <>
-                        <li><img src={image.location}/></li>
-                        </>
-                    );
-                })}
-            </div>
+                    <div>
+                        <Typography variant="h6">Upload An Image</Typography>
+                    </div>
+                    <div>
+                        <Input type="file" onChange={this.handleChange} className={classes.input}/>    
+                    </div>
+                    <progress value={this.state.progress} max="100" />
+                    <div>
+                        <Button onClick={this.handleUpload} className={classes.button}>Upload</Button>
+                        <Button onClick={this.saveImage} className={classes.button}>Save Image</Button>
+                        
+                        {/* <img src={this.state.url} alt="Uploaded images" height='400' width='400'/> */}
+                    </div>
+   
             </>
         );
     }
@@ -101,4 +117,4 @@ const putReduxStateOnProps = reduxStore => ({
     images: reduxStore.images,
 })
 
-export default withStyles()(connect(putReduxStateOnProps)(ImageUpload));
+export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(ImageUpload)));

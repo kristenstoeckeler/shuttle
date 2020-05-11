@@ -18,9 +18,11 @@ const styles = theme => ({
     textField: {
         marginTop: 20,
         marginLeft: 60,
-        width: 'auto',
+        width: 'max-content',
         fontWeight: 500,
-
+        color: theme.palette.secondary.dark,
+        paddingTop: 30,
+        borderRadius: 5,
     },
     root: {
         flexGrow: 1,
@@ -37,8 +39,9 @@ const styles = theme => ({
         backgroundColor: theme.palette.secondary.dark,
         color: theme.palette.common.white,
         float: 'right',
-        marginTop: 20,
+        marginTop: 30,
         marginRight: 60,
+
     },
     input: {
         backgroundColor: theme.palette.common.white,
@@ -50,6 +53,11 @@ const styles = theme => ({
         fontSize: 35,
         margin: 4,
         paddingLeft: 10,
+    },
+    background: {
+        backgroundColor: theme.palette.common.white,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
     }
 });
 
@@ -158,13 +166,18 @@ class ProjectHeader extends Component {
         const classes = this.props.classes;
         return (
             <>
-            <header>                
-                <Grid align-items-xs-right justify-xs-flex-end>
-                    <Button type="submit" onClick={this.handleSubmit} className={classes.button}>Save Project</Button>
+            <header>    
+                <Grid className={classes.background}>         
+                    <Grid >
+                        <Button type="submit" onClick={this.handleSubmit} className={classes.button}>Save Project</Button>
+                    </Grid>
+                    <Grid>
+                        <Typography onClick={this.handleClick} variant="h4" component="h5" className={classes.textField}>
+                            {this.props.detail.project_name}
+                        </Typography>
+                    </Grid>
+
                 </Grid>
-                    <Typography onClick={this.handleClick} variant="h5" component="h5" className={classes.textField}>
-                    {this.props.detail.project_name}
-                </Typography>
 
             </header>
             </>
