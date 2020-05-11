@@ -56,9 +56,9 @@ class ParamsCard extends Component {
                                 <Typography component="p">
                                     Warp takeup: <b>{this.props.detail.warp_takeup_percent}%</b>
                                 </Typography>
-                                <Typography component="p">
+                                {/* <Typography component="p">
                                     Length shrinkage: <b>{this.props.detail.length_shrinkkage_percent}%</b>
-                                </Typography>
+                                </Typography> */}
                                 <Typography component="p">
                                     Finished width: <b>{this.props.detail.finished_width_in} in.</b>
                                 </Typography>
@@ -77,9 +77,9 @@ class ParamsCard extends Component {
                                 {/* <Typography component="p">
                                     Picks per inch: <b>{this.props.detail.ppi} ppi</b>
                                 </Typography> */}
-                                <Typography component="p">
+                                {/* <Typography component="p">
                                     Takeup: <b>{this.props.detail.weft_takeup_percent}%</b>
-                                </Typography>
+                                </Typography> */}
                                 </div>
                             </Paper>
                             <Paper elevation={1} className={classes.details} >
@@ -93,9 +93,9 @@ class ParamsCard extends Component {
                                         <Typography component="p">
                                             Total yards: <b>{this.props.detail.warp_total_yds} yds.</b>
                                         </Typography>
-                                        <Typography component="p">
+                                        {/* <Typography component="p">
                                             Total ounces: <b>{this.props.detail.warp_total_oz} oz.</b>
-                                        </Typography>
+                                        </Typography> */}
                                         <Typography component="p">
                                             Warp  length: <b>{this.props.detail.warp_length_in} in.</b>
                                         </Typography>

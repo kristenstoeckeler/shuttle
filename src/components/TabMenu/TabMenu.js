@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
         height: 'flex',
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginBottom: 10,
+        marginBottom: 40,
         paddingTop: 30,
         paddingBottom: 50,
         paddingLeft: 150,
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
     const classes = useStyles();
     //this sets which tab automatically loads
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(4);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

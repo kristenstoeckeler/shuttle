@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+//passes props to child component to access props.history
 import { withRouter } from 'react-router';
 
 
-//Material UI Imports
+//imports for Material UI styling
 import { withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 
-import './DashboardGrid.css';
-
-
-
+//declaring style properties for Material UI elements
 const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: theme.palette.secondary.dark,
@@ -28,6 +28,7 @@ const CustomTableCell = withStyles(theme => ({
     },
 }))(TableCell);
 
+////declaring style properties for Material UI elements
 const styles = theme => ({
     root: {
         width: '85%',
@@ -67,6 +68,7 @@ const styles = theme => ({
     }
 });
 
+
 class DashboardGrid extends Component {
 
     state = {
@@ -74,16 +76,16 @@ class DashboardGrid extends Component {
         projectId: '',
     }
 
+    //dispatching to Project saga to render users projects in Dashboard Grid
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_PROJECTS', payload: this.state.userId });
-    }
+    }//end componentDidMount 
 
     handleClick = (projectName, projectId) => {
         console.log( 'in handleClick', projectName, projectId );
         this.props.dispatch({ type: 'WORKING_REDUCER', payload: projectId})
 
         this.props.history.push(`/draft/${projectId}`)
-        
     }
 
     render(){
@@ -123,9 +125,6 @@ class DashboardGrid extends Component {
         );
     }
 }
-
-
-
 
 DashboardGrid.propTypes = {
     classes: PropTypes.object.isRequired,

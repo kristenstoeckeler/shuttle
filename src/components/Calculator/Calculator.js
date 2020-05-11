@@ -1,89 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactDOM from 'react-dom';
+
+//withRouter allows Calculator to access match.params
 import { withRouter } from 'react-router';
 
-import ParamsCard from '../ParamsCard/ParamsCard';
+//imports for Material UI styling
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 
+//importing ParamsCard component
+import ParamsCard from '../ParamsCard/ParamsCard';
 
+//declaring style properties
 const styles = theme => ({
-    // container: {
-    //     display: 'flex',
-    //     flexWrap: 'wrap',
-    // },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-    },
-    // weft: {
-    //     // marginLeft: 250,
-    // },
-    // dense: {
-    //     marginTop: 16,
-    // },
-    // menu: {
-    //     width: 200,
-    // },
     root: {
         flexGrow: 1,
         marginLeft: 50,
     },
-    // grow: {
-    //     flexGrow: 1,
-    // },
-    // h2: {
-    //     fontSize: 3
-    // },
-    // grid: {
-    //     margin: 20,
-    // },
-    // menuButton: {
-    //     marginLeft: -12,
-    //     marginRight: 20,
-    // },
     button: {
         margin: 5,
         backgroundColor: theme.palette.secondary.dark,
         color: theme.palette.common.white,
-        // position: 'right',
     },
-    // floatButton: {
-    //     // marginLeft: 200,
-    //     backgroundColor: theme.palette.secondary.dark,
-    //     color: theme.palette.common.white,
-    //     position: 'right',
-    // },
     input: {
         backgroundColor: theme.palette.common.white,
         fontSize: 35,
         margin: 4,
         paddingLeft: 10,
     },
-    // typography: {
-    //     fontSize: 35,
-    //     margin: 4,
-    //     paddingLeft: 10,
-    // },
     textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
         margin: 3,
     },
-    // float: {
-    //     marginRight: 200,
-    //     fontWeight: '500',
-    //     fontSize: 14,
-    //     padding: 20,
-    // },
 });
 
 
 class Calculator extends Component {
 
+    //setting state, grabbing match.params through router for GET route based on project ID
+    //most of state is set from DETAIL reducer
     state = ({
         id: this.props.match.params,
         project_status: false,
@@ -114,14 +74,16 @@ class Calculator extends Component {
         weft_total_oz: this.props.detail.weft_total_oz,
     })
 
+    //changes state based on Calculator input values
     handleChange = (event, propertyName) => {
         event.preventDefault();
 
         this.setState({
             [propertyName]: event.target.value,
         });
-    }
+    }//end handleChange
 
+    //calculates yarn needs based on Calculator input values
     handleClick = () => {
         
         const weavingLength = Number(this.state.finished_length_in) + Number(this.state.sampling_length_in);
@@ -143,6 +105,7 @@ class Calculator extends Component {
         const totalYards = Math.round((totalInches / 36) *100) / 100;
         console.log('here is totalYards', totalYards);
 
+        //sends newly calculated state property values to Detail reducer
         this.props.dispatch({
             type: 'DETAIL_REDUCER', 
             payload: {
@@ -154,26 +117,32 @@ class Calculator extends Component {
             }
         });
 
+        //updates state with newly calculated state property values. 
         this.setState({
             warp_length_in: totalInches,
             width_in_reed_in: totalWidthInches,
             warp_ends: numberOfEnds,
             warp_total_yds: totalYards,
         });
-    }
+    }//end handleClick
 
+    //secret button is for presentation of application to fill calculator with pre-existing values
+    //allowing conditional render by changing state.project_status
+    //FUTURE: will use this to turn into a permanent app feature for ease of use.
     secretButton = () => {
         this.setState({
             project_status: !this.state.project_status,
         })
-
-    }
+    }//end secretButton
 
 
     render() {
+        //applying style properties to props
         const classes = this.props.classes;
-        console.log('here is new state:', this.state);
 
+        //conditionally rendering calculator based on click of secret button
+        //some elements below are commented out
+        //FUTURE: separate "warp" calculator out
         return (
             <> 
             {this.state.project_status ? 
@@ -758,7 +727,6 @@ Calculator.propTypes = {
 const putReduxStateOnProps = reduxStore => ({
     user: reduxStore.user,
     detail: reduxStore.detail,
-    working: reduxStore.working,
 })
 
 export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(Calculator)));

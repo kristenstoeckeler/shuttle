@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+//imports for Material UI styling
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
-
 import Typography from '@material-ui/core/Typography';
 
+//declaring style properties
 const styles = theme => ({
+    button: {
+        marginTop: 15,
+        backgroundColor: theme.palette.secondary.dark,
+        color: theme.palette.common.white,
+    },
     card: {
         minWidth: 275,
         position: 'relative',
@@ -20,22 +26,6 @@ const styles = theme => ({
         margin: 30,
         maxWidth: 300,
         backgroundColor: "secondary",
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-    button: {
-        marginTop: 15,
-        backgroundColor: theme.palette.secondary.dark,
-        color: theme.palette.common.white,
     }
 });
 
@@ -46,10 +36,11 @@ class CreateAccountCard extends Component {
         password: ''
     };
 
+    //function sends new user information to REGISTER saga
     registerUser = (event) => {
         event.preventDefault();
 
-        if (this.state.username && this.state.password) {
+        if (this.state.username && this.state.password && this.state.email) {
             this.props.dispatch({
                 type: 'REGISTER',
                 payload: {
@@ -64,63 +55,64 @@ class CreateAccountCard extends Component {
         }
     } // end registerUser
 
+    //setting state based on new user inputs
     handleInputChangeFor = propertyName => (event) => {
         this.setState({
             [propertyName]: event.target.value,
         });
-    }
+    }//end handleInputChangeFor
 
     render(){
-    const classes = this.props.classes;
-    return (
-        <>
-        <Card className={classes.card} background-color="secondary">
-            <CardContent>
-                <form onSubmit={this.registerUser}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Sign Me Up!
-                    </Typography>
-                    <div>
-                        <Input
-                            placeholder="username"
-                            className="input"
-                            type="text"
-                            name="username"
-                            value={this.state.username}
-                            onChange={this.handleInputChangeFor('username')}>
-                        </Input>
+        const classes = this.props.classes;
+        return (
+            <>
+            <Card className={classes.card} background-color="secondary">
+                <CardContent>
+                    <form onSubmit={this.registerUser}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            Sign Me Up!
+                        </Typography>
+                        <div>
+                            <Input
+                                placeholder="username"
+                                className="input"
+                                type="text"
+                                name="username"
+                                value={this.state.username}
+                                onChange={this.handleInputChangeFor('username')}>
+                            </Input>
 
-                    </div>
-                    <div>
-                        <Input
-                            placeholder="email"
-                            className="input"
-                            type="text"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.handleInputChangeFor('email')}>
-                        </Input>
+                        </div>
+                        <div>
+                            <Input
+                                placeholder="email"
+                                className="input"
+                                type="text"
+                                name="email"
+                                value={this.state.email}
+                                onChange={this.handleInputChangeFor('email')}>
+                            </Input>
 
-                    </div>
+                        </div>
+                        <div>
+                            <Input
+                                placeholder="password"
+                                className="input"
+                                type="password"
+                                name="password"
+                                value={this.state.password}
+                                onChange={this.handleInputChangeFor('password')}>
+                            </Input>
+                        </div>
+                        <div>
+                            <Button className={classes.button} type="submit">Create Account</Button>
+                        </div>
+                    </form>
                     <div>
-                        <Input
-                            placeholder="password"
-                            className="input"
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.handleInputChangeFor('password')}>
-                        </Input>
                     </div>
-                    <div>
-                        <Button className={classes.button} type="submit">Create Account</Button>
-                    </div>
-                </form>
-                <div>
-                </div>
-            </CardContent>        
-        </Card>
-        </>
+                </CardContent>        
+            </Card>
+            </>
     );
 }
 }
