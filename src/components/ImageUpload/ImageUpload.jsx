@@ -45,7 +45,7 @@ class ImageUpload extends Component {
             const image = event.target.files[0];
             this.setState(() => ({image}));
         }
-    }
+    };
 
     handleUpload = (event) => {
         const {image} = this.state;
@@ -62,9 +62,12 @@ class ImageUpload extends Component {
         },
         () => {
             //complete function
-            storage.ref('images').child(image.name).getDownloadURL().then(url => {
+            storage.ref('images')
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
                 console.log(url);
-                this.setState({url});
+                this.setState({ url });
             })
         });
     }

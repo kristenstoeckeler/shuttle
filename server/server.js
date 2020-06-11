@@ -8,7 +8,6 @@ const sessionMiddleware = require('./modules/session-middleware');
 
 const passport = require('./strategies/user.strategy');
 
-// Route includes KRISTEN! HERE TOO
 const userRouter = require('./routes/user.router');
 const projectRouter = require('./routes/project.router');
 const detailRouter = require('./routes/detail.router');
@@ -26,7 +25,7 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* Routes * KRISTEN! ADD MORE OF YOUR ROUTES HERE */
+/* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/project', projectRouter);
 app.use('/api/detail', detailRouter);
@@ -43,3 +42,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+module.exports = app;
