@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 //imports for Material UI styling
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/card'; 
+import Card from '@material-ui/core/Card'; 
 import Typography from '@material-ui/core/Typography';
 
 //import for background image
