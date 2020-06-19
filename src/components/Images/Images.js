@@ -19,11 +19,14 @@ import { withRouter } from 'react-router';
 
 const styles = theme => ({
     root: {
-        float: 'left',
-        marginBottom: 4,
-        padding: 1,
         flexGrow: 1,
     },
+
+    paper: {
+        float: 'left',
+        margin: 8,
+        padding: theme.spacing.unit / 2,
+    }
 });
 
 
@@ -36,19 +39,21 @@ class Images extends Component {
         const classes = this.props.classes;
         return (
             <>
-            <Grid container spacing={16} className={classes.root}>
-             {this.props.images.map((image) => {
-                    return (
-                        <>
-                        <Grid item xs={3}>
-                            <Paper className={classes.root}>
-                                <img src={image.location} height='200' width='200' />
-                            </Paper>
-                        </Grid>
-                        </>
-                    );
-                })}
-            </Grid>
+            <div className={classes.root}>
+                <Grid container spacing={24}>
+                    {this.props.images.map((image) => {
+                            return (
+                                <>
+                                <Grid >
+                                    <Paper className={classes.paper}>
+                                        <img src={image.location} height='200' width='200' />
+                                    </Paper>
+                                </Grid>
+                                </>
+                            );
+                        })}
+                </Grid>
+            </div>
             </>
         );
     }

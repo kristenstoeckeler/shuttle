@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {storage} from '../../Firebase';
+import { storage } from '../../Firebase';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router';
 import '../Images/Images.css';
@@ -41,35 +41,35 @@ class ImageUpload extends Component {
     }
 
     handleChange = (event) => {
-        if(event.target.files[0]){
+        if (event.target.files[0]) {
             const image = event.target.files[0];
-            this.setState(() => ({image}));
+            this.setState(() => ({ image }));
         }
     };
 
     handleUpload = (event) => {
-        const {image} = this.state;
+        const { image } = this.state;
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
-        uploadTask.on('state_changed', 
-        (snapshot) => {
-            //progress function
-            const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            this.setState({progress});
-        },
-        (error) => {
-            //error function
-            console.log(error);
-        },
-        () => {
-            //complete function
-            storage.ref('images')
-            .child(image.name)
-            .getDownloadURL()
-            .then(url => {
-                console.log(url);
-                this.setState({ url });
-            })
-        });
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                //progress function
+                const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                this.setState({ progress });
+            },
+            (error) => {
+                //error function
+                console.log(error);
+            },
+            () => {
+                //complete function
+                storage.ref('images')
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        console.log(url);
+                        this.setState({ url });
+                    })
+            });
     }
 
     saveImage = () => {
@@ -84,7 +84,7 @@ class ImageUpload extends Component {
 
     render() {
         const classes = this.props.classes;
-        console.log( 'here is IMAGE UPLOAD state', this. state);
+        console.log('here is IMAGE UPLOAD state', this.state);
         // const style = {
         //     height: '100vh',
         //     display: 'flex',
@@ -92,22 +92,22 @@ class ImageUpload extends Component {
         //     alignItems: 'center',
         //     justifyContent: 'center'
         // };
-        return(
+        return (
             <>
-                    <div>
-                        <Typography variant="h6">Upload An Image</Typography>
-                    </div>
-                    <div>
-                        <Input type="file" onChange={this.handleChange} className={classes.input}/>    
-                    </div>
-                    <progress value={this.state.progress} max="100" />
-                    <div>
-                        <Button onClick={this.handleUpload} className={classes.button}>Upload</Button>
-                        <Button onClick={this.saveImage} className={classes.button}>Save Image</Button>
-                        
-                        {/* <img src={this.state.url} alt="Uploaded images" height='400' width='400'/> */}
-                    </div>
-   
+                <div>
+                    <Typography variant="h6">Upload An Image</Typography>
+                </div>
+                <div>
+                    <Input type="file" onChange={this.handleChange} className={classes.input} />
+                </div>
+                <progress value={this.state.progress} max="100" />
+                <div>
+                    <Button onClick={this.handleUpload} className={classes.button}>Upload</Button>
+                    <Button onClick={this.saveImage} className={classes.button}>Save Image</Button>
+
+                    {/* <img src={this.state.url} alt="Uploaded images" height='400' width='400'/> */}
+                </div>
+
             </>
         );
     }
@@ -119,5 +119,4 @@ const putReduxStateOnProps = reduxStore => ({
     detail: reduxStore.detail,
     images: reduxStore.images,
 })
-
 export default withStyles(styles)(withRouter(connect(putReduxStateOnProps)(ImageUpload)));

@@ -4,13 +4,10 @@ import { withRouter } from 'react-router';
 
 import './DraftFile.css';
 import PropTypes from 'prop-types';
-import TabMenu from '../TabMenu/TabMenu';
-import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+
+import Dialog from '../Dialog/Dialog';
+
 
 
 const styles = theme => ({
@@ -84,8 +81,10 @@ class Draft extends Component {
         const classes = this.props.classes;
         return (
             <>
+            
             <div className={classes.root}>
                 {/* <div>{this.handleColor()}</div> */}
+                <Dialog />
                 <table>
                     <tr>
                         <td></td>

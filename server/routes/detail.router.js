@@ -10,7 +10,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * GET route template
  */
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('made it to server detail router GET for project #', req.params.id);
+    console.log('made it to server detail router GET for project #', req.user);
     const queryText = 'SELECT * FROM "project" WHERE "id" = $1;'
 
     if (req.isAuthenticated()) {

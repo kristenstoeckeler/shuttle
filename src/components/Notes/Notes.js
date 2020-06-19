@@ -6,24 +6,21 @@ import { withRouter } from 'react-router';
 
 
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
 
 
 const styles = theme => ({
    root: {
         marginLeft: 10,
+        flexGrow: 1,
    },
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-
-
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -54,10 +51,6 @@ const styles = theme => ({
     },
     menu: {
         width: 200,
-    },
-    root: {
-        flexGrow: 1,
-        marginLeft: 50,
     },
     grow: {
         flexGrow: 1,

@@ -113,8 +113,8 @@ export default function VerticalTabs() {
                 {/* <Images /> */}
             </TabPanel>
             <TabPanel value={value} index={4}>
-                <Images />
                 <div>
+                    <Images />
                     {/* <MaterialsTable /> */}
                     <ParamsCard />
                     <Notes />

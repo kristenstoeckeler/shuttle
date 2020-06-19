@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('made it to server image router GET for project #', req.params.id);
+    console.log('made it to server image router GET for project #', req.user);
     const queryText = 'SELECT * FROM "photos" WHERE "project_id" = $1;'
 
     if (req.isAuthenticated()) {

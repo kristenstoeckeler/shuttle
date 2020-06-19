@@ -3,7 +3,6 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "CREATE_PROJECTS" actions
 function* deleteProject(action) {
-    console.log('in deleteProject saga', action.payload)
     try {
         yield axios.delete(`/api/project/${action.payload}`);
     } catch (error) {
