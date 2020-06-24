@@ -11,24 +11,19 @@ _Duration: 2 Week Sprint_
 
 Shuttle takes the often scattered process of devising brand-new handweaving projects and lends digital simplicity and organization. Equipped with a calculator to determine yarn needs, photo album and notepad, Shuttle is an application that makes devising, organizing, and documenting weaving projects easy. 
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com) [Coming soon.]
+To see the fully functional site, please visit: https://fierce-thicket-39020.herokuapp.com/#/home
 
 ## Screen Shot
 
-[Coming soon.]
+![Homepage]:(/public/screenshot-login.png)
 
 ### Prerequisites
 
 Link to software that is required to install the app (e.g. node).
 
-- React
-- Redux
 - [Node.js](https://nodejs.org/en/)
-- Express
-- PostgreSQL
-- Firebase
-- Material UI
-Shuttle uses React, Redux, Node.js, Express, PostgreSQL, Firebase & Material UI.
+- [PostgreSQL](https://www.postgresql.org/download/)
+
 
 ## Installation
 
@@ -56,7 +51,7 @@ How does someone use this application? Tell a user story here.
 
 ## Built With
 
- React
+- React
 - Redux
 - [Node.js](https://nodejs.org/en/)
 - Express
