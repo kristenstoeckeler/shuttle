@@ -92,14 +92,14 @@ class Calculator extends Component {
         const totalLengthInches = subTotalLengthInches * Number(this.state.quantity) + Number(this.state.loom_waste_in);
 
         const takeupFactorWidth = Number(this.state.finished_width_in) / Number(this.state.width_shrinkage_percent);
-        const totalWidthInches = Number(this.state.finished_width_in) + takeupFactorWidth;
+        const totalWidthInches = Math.round(Number(this.state.finished_width_in) + takeupFactorWidth) * 100 / 100;
         
         const numberOfEnds =
-            totalWidthInches * Number(this.state.sett) + Number(this.state.extra_ends);
+            Math.round(totalWidthInches * Number(this.state.sett) + Number(this.state.extra_ends)) * 100 / 100;
         console.log('here is numberOfEnds', numberOfEnds);
 
         const totalInches = 
-            totalLengthInches * numberOfEnds;
+            Math.round(totalLengthInches * numberOfEnds) *100 / 100;
         console.log('here is totalInches', totalInches);
 
         const totalYards = Math.round((totalInches / 36) *100) / 100;

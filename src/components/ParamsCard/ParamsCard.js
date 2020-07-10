@@ -39,31 +39,31 @@ class ParamsCard extends Component {
                                     Draft Specs
                                 </Typography>
                                 <Typography component="p">
-                                    Finished length: <b>{this.props.detail.finished_length_in} in.</b>
+                                    Finished length: {this.props.detail.finished_length_in && <b>{this.props.detail.finished_length_in} in.</b>}
                                 </Typography>
                                 <Typography component="p">
                                     Quantity: <b>{this.props.detail.quantity}</b>
                                 </Typography>
                                 <Typography component="p">
-                                    Fringe length: <b>{this.props.detail.fringe_length_in} in.</b>
+                                    Fringe length: {this.props.detail.fringe_length_in && <b>{this.props.detail.fringe_length_in} in.</b>}
                                 </Typography>
                                 <Typography component="p">
-                                    Sampling length: <b>{this.props.detail.sampling_length_in} in.</b>
+                                    Sampling length: {this.props.detail.sampling_length_in && <b>{this.props.detail.sampling_length_in} in.</b>}
                                 </Typography>
                                 <Typography component="p">
-                                    Loom waste: <b>{this.props.detail.loom_waste_in} in.</b>
+                                    Loom waste: {this.props.detail.loom_waste_in && <b>{this.props.detail.loom_waste_in} in.</b>}
                                 </Typography>
                                 <Typography component="p">
-                                    Warp takeup: <b>{this.props.detail.warp_takeup_percent}%</b>
+                                    Warp takeup: {this.props.detail.warp_takeup_percent && <b>{this.props.detail.warp_takeup_percent}%</b>}
                                 </Typography>
                                 {/* <Typography component="p">
                                     Length shrinkage: <b>{this.props.detail.length_shrinkkage_percent}%</b>
                                 </Typography> */}
                                 <Typography component="p">
-                                    Finished width: <b>{this.props.detail.finished_width_in} in.</b>
+                                    Finished width: {this.props.detail.finished_width_in && <b>{this.props.detail.finished_width_in} in.</b>}
                                 </Typography>
                                 <Typography component="p">
-                                    Width shrinkage: <b>{this.props.detail.width_shrinkage_percent}%</b>
+                                    Width shrinkage: {this.props.detail.width_shrinkage_percent && <b>{this.props.detail.width_shrinkage_percent}%</b>}
                                 </Typography>
                                 <Typography component="p">
                                     Sett: <b>{this.props.detail.sett}</b>
@@ -72,7 +72,7 @@ class ParamsCard extends Component {
                                     Extra ends: <b>{this.props.detail.extra_ends}</b>
                                 </Typography>
                                 <Typography component="p">
-                                    Warp ypp: <b>{this.props.detail.warp_yards_per_lb} yds. per lb.</b>
+                                    Warp ypp: {this.props.detail.warp_yards_per_lb && <b>{this.props.detail.warp_yards_per_lb} yds. per lb.</b>}
                                 </Typography>
                                 {/* <Typography component="p">
                                     Picks per inch: <b>{this.props.detail.ppi} ppi</b>
@@ -91,16 +91,16 @@ class ParamsCard extends Component {
                                             Number of ends: <b>{this.props.detail.warp_ends}</b>
                                         </Typography>
                                         <Typography component="p">
-                                            Total yards: <b>{this.props.detail.warp_total_yds} yds.</b>
+                                            Total yards: {this.props.detail.warp_total_yds && <b>{this.props.detail.warp_total_yds} yds.</b>}
                                         </Typography>
                                         {/* <Typography component="p">
                                             Total ounces: <b>{this.props.detail.warp_total_oz} oz.</b>
                                         </Typography> */}
                                         <Typography component="p">
-                                            Warp  length: <b>{this.props.detail.warp_length_in} in.</b>
+                                            Warp  length: {this.props.detail.warp_length_in && <b>{this.props.detail.warp_length_in} in.</b>}
                                         </Typography>
                                         <Typography component="p" gutterBottom>
-                                            Width in reed: <b>{this.props.detail.width_in_reed_in} in.</b>
+                                            Width in reed: {this.props.detail.width_in_reed_in && <b>{this.props.detail.width_in_reed_in} in.</b>}
                                         </Typography>
                                 </div>
                             </Paper>

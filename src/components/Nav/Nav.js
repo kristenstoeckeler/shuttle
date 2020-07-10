@@ -50,9 +50,9 @@ function Nav(props){
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+          {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Link to="/home"></Link>
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Shuttle: a project tool for handweavers

@@ -81,6 +81,10 @@ const styles = theme => ({
 
 class Notes extends Component {
 
+    state = {
+        notes: this.props.detail.notes,
+    }
+
     componentDidMount() {
         this.props.dispatch({ type: 'DETAILS', payload: this.props.match.params });
     }
@@ -105,7 +109,8 @@ class Notes extends Component {
                     </Typography>  
                     <TextField
                         id="standard-textarea"
-                        defaultValue={this.props.detail.notes}
+                        placeholder="Take some notes here!"
+                        value={this.state.notes}
                         multiline
                         className={classes.textField}
                         margin="normal"
